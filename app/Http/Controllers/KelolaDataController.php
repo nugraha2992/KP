@@ -179,7 +179,7 @@ class KelolaDataController extends Controller
                             if ($insertData) {
                                 Session::flash('success', 'Data Berhasil diimport');
                             } else {
-                                Session::flash('error', 'Error inserting the data..');
+                                Session::flash('error', 'Error gagal input data..');
                                 return back();
                             }
                         }
@@ -190,6 +190,7 @@ class KelolaDataController extends Controller
                 Session::flash('error', 'file adalah ' . $extension . ' silahkan upload file excel hari ini yang terbaru');
                 return back();
             }
+            return back();
         }
     }
 }

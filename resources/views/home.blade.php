@@ -124,6 +124,188 @@
 			    </div>
 		</div>
 @endcan
+    <div class="row">
+			<div class="col-md-12">
+
+				<!-- Default box -->
+				<div class="box">
+					<div class="box-header with-border">
+						<h3 class="box-title">1</h3>
+						<div class="box-tools pull-right">
+							<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+								<i class="fa fa-minus"></i></button>
+						</div>
+					</div>
+                    <div class="box-body">
+                     <canvas id="bar-chart" width="50%" height="10%"></canvas>
+					</div>       
+				</div>
+				<!-- /.box -->
+
+			    </div>
+		</div>
+
+        <div class="row">
+			<div class="col-md-12">
+
+				<!-- Default box -->
+				<div class="box">
+					<div class="box-header with-border">
+						<h3 class="box-title">2t</h3>
+						<div class="box-tools pull-right">
+							<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+								<i class="fa fa-minus"></i></button>
+						</div>
+					</div>
+                    <div class="box-body">
+                     <canvas id="bar-chart" width="50%" height="10%"></canvas>
+					</div>       
+				</div>
+				<!-- /.box -->
+
+			    </div>
+		</div>
+
+        <div class="row">
+			<div class="col-md-12">
+
+				<!-- Default box -->
+				<div class="box">
+					<div class="box-header with-border">
+						<h3 class="box-title">3</h3>
+						<div class="box-tools pull-right">
+							<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+								<i class="fa fa-minus"></i></button>
+						</div>
+					</div>
+                    <div class="box-body">
+                     <canvas id="bar-chart" width="50%" height="10%"></canvas>
+					</div>       
+				</div>
+				<!-- /.box -->
+
+			    </div>
+		</div>
+        <div class="row">
+			<div class="col-md-12">
+
+				<!-- Default box -->
+				<div class="box">
+					<div class="box-header with-border">
+						<h3 class="box-title">2t</h3>
+						<div class="box-tools pull-right">
+							<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+								<i class="fa fa-minus"></i></button>
+						</div>
+					</div>
+                    <div class="box-body">
+                     <canvas id="bar-chart" width="50%" height="10%"></canvas>
+					</div>       
+				</div>
+				<!-- /.box -->
+
+			    </div>
+		</div>
+        <div class="row">
+			<div class="col-md-12">
+
+				<!-- Default box -->
+				<div class="box">
+					<div class="box-header with-border">
+						<h3 class="box-title">2t</h3>
+						<div class="box-tools pull-right">
+							<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+								<i class="fa fa-minus"></i></button>
+						</div>
+					</div>
+                    <div class="box-body">
+                     <canvas id="bar-chart" width="50%" height="10%"></canvas>
+					</div>       
+				</div>
+				<!-- /.box -->
+
+			    </div>
+		</div>
+        <div class="row">
+			<div class="col-md-12">
+
+				<!-- Default box -->
+				<div class="box">
+					<div class="box-header with-border">
+						<h3 class="box-title">2t</h3>
+						<div class="box-tools pull-right">
+							<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+								<i class="fa fa-minus"></i></button>
+						</div>
+					</div>
+                    <div class="box-body">
+                     <canvas id="bar-chart" width="50%" height="10%"></canvas>
+					</div>       
+				</div>
+				<!-- /.box -->
+
+			    </div>
+		</div>
+        <div class="row">
+			<div class="col-md-12">
+
+				<!-- Default box -->
+				<div class="box">
+					<div class="box-header with-border">
+						<h3 class="box-title">2t</h3>
+						<div class="box-tools pull-right">
+							<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+								<i class="fa fa-minus"></i></button>
+						</div>
+					</div>
+                    <div class="box-body">
+                     <canvas id="bar-chart" width="50%" height="10%"></canvas>
+					</div>       
+				</div>
+				<!-- /.box -->
+
+			    </div>
+		</div>
+        <div class="row">
+			<div class="col-md-12">
+
+				<!-- Default box -->
+				<div class="box">
+					<div class="box-header with-border">
+						<h3 class="box-title">2t</h3>
+						<div class="box-tools pull-right">
+							<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+								<i class="fa fa-minus"></i></button>
+						</div>
+					</div>
+                    <div class="box-body">
+                     <canvas id="bar-chart" width="50%" height="10%"></canvas>
+					</div>       
+				</div>
+				<!-- /.box -->
+
+			    </div>
+		</div>
+        <div class="row">
+			<div class="col-md-12">
+
+				<!-- Default box -->
+				<div class="box">
+					<div class="box-header with-border">
+						<h3 class="box-title">2t</h3>
+						<div class="box-tools pull-right">
+							<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+								<i class="fa fa-minus"></i></button>
+						</div>
+					</div>
+                    <div class="box-body">
+                     <canvas id="bar-chart" width="50%" height="10%"></canvas>
+					</div>       
+				</div>
+				<!-- /.box -->
+
+			    </div>
+		</div>
 </div>
 @endsection
  <script src=https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js charset=utf-8></script>

@@ -40,6 +40,7 @@ class TestEmail extends Mailable
             ->cc($address, $name)
             ->bcc($address, $name)
             ->replyTo($address, $name)
-            ->subject($subject);
+            ->subject($subject)
+            ->with([ 'message' => 'Berikut adalah Peringkat Anda'.$this->data['message'] ]);
     }
 }

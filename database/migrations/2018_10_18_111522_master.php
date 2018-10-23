@@ -54,7 +54,7 @@ class Master extends Migration
             $table->string('Tunggakan_Denda', 15)->nullable(true);
             $table->date('Tgl_Tg_Pokok');
             $table->string('FT_Pokok', 5)->nullable(true);
-            $table->string('Tgl_Tg_Bunga');
+            $table->date('Tgl_Tg_Bunga');
             $table->string('FT_Bunga', 5)->nullable(true);
             $table->string('Tgk_Angs_Ke', 4)->nullable(true);
             $table->string('Denda_bln_ini', 7)->nullable(true);
@@ -83,12 +83,6 @@ class Master extends Migration
             $table->string('NamaCabang', 256)->nullable(true);
             $table->string('Kota_ID', 10)->nullable(true);
             $table->string('Angsuran_Ke', 10)->nullable(true);
-            $table->string('kodeunit', 2)->nullable(true);
-            $table->string('NamaUnit', 50)->nullable(true);
-            $table->string('InisialCab', 3)->nullable(true);
-            $table->string('NamaCabang', 10)->nullable(true);
-            $table->string('Kota_ID', 4)->nullable(true);
-            $table->string('Angsuran_Ke', 3)->nullable(true);
         });
     }
 
