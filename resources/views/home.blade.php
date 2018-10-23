@@ -29,11 +29,11 @@
                             <div class="col-md-4">
                                 <!-- Info Boxes Style 2 -->
                             <div class="info-box bg-green">
-                                <span class="info-box-icon"><i class="ion ion-ios-pie-outline"></i></span>
+                                <span class="info-box-icon"><i class="fa fa-money"></i></span>
 
                                 <div class="info-box-content">
                                 <span class="info-box-text">OS</span>
-                                <span class="info-box-number">{{ "Rp. ". number_format(array_sum(json_decode ($OSData)), 2) }}</span>
+                                <span class="info-box-number">{{ "Rp. ". number_format(array_sum(json_decode ($OSData))/1000000000, 2) ." M"  }}</span>
 
                                 <div class="progress">
                                     <div class="progress-bar" style="width: 50%"></div>
@@ -320,8 +320,40 @@
                             data: {
                                 labels: dtLabel,
                                 datasets: [{
-                                    data: dtDATA
-                                }]
+                                    data: dtDATA,
+                                    backgroundColor: [
+                                    getRandomColorHex(),
+                                    getRandomColorHex(),
+                                    getRandomColorHex(),
+                                    getRandomColorHex(),
+                                    getRandomColorHex(),
+                                    getRandomColorHex(),
+                                    getRandomColorHex(),
+                                    getRandomColorHex(),
+                                    getRandomColorHex(),
+                                    getRandomColorHex(),
+                                    getRandomColorHex(),
+                                    getRandomColorHex(),
+                                    getRandomColorHex(),
+                                ],
+                                borderColor: [
+                                    getRandomColorHex(),
+                                    getRandomColorHex(),
+                                    getRandomColorHex(),
+                                    getRandomColorHex(),
+                                    getRandomColorHex(),
+                                    getRandomColorHex(),
+                                    getRandomColorHex(),
+                                    getRandomColorHex(),
+                                    getRandomColorHex(),
+                                    getRandomColorHex(),
+                                    getRandomColorHex(),
+                                    getRandomColorHex(),
+                                    getRandomColorHex(),
+                                ],
+                                borderWidth: 1
+                                }],
+                                
                             },
                             options: {
                                 legend: {
@@ -354,7 +386,38 @@
                                 labels: dtLabelPie,
                                 datasets: [{
                                     label: "",
-                                    data: dtDATAPie
+                                    data: dtDATAPie,
+                                    backgroundColor: [
+                                    getRandomColorHex(),
+                                    getRandomColorHex(),
+                                    getRandomColorHex(),
+                                    getRandomColorHex(),
+                                    getRandomColorHex(),
+                                    getRandomColorHex(),
+                                    getRandomColorHex(),
+                                    getRandomColorHex(),
+                                    getRandomColorHex(),
+                                    getRandomColorHex(),
+                                    getRandomColorHex(),
+                                    getRandomColorHex(),
+                                    getRandomColorHex(),
+                                ],
+                                borderColor: [
+                                    "#ffd",
+                                    "#ffd",
+                                    "#ffd",
+                                    "#ffd",
+                                    "#ffd",
+                                    "#ffd",
+                                    "#ffd",
+                                    "#ffd",
+                                    "#ffd",
+                                    "#ffd",
+                                    "#ffd",
+                                    "#ffd",
+                                    "#ffd",
+                                ],
+                                borderWidth: 1
                                 }]
                             },
                             options: {
@@ -376,7 +439,8 @@
                                 labels: dtLabelLine,
                                 datasets: [{
                                     label: "",
-                                    data: dtDATALine
+                                    data: dtDATALine,
+                                    borderColor: "#3e95cd",
                                 }]
                             },
                             options: {
@@ -401,6 +465,15 @@
                                 
                             }
                         });
+
+                         function getRandomColorHex() {
+                             var hex = "0123456789ABCDEF",
+                                 color = "#";
+                             for (var i = 1; i <= 6; i++) {
+                                 color += hex[Math.floor(Math.random() * 16)];
+                             }
+                             return color;
+                         }
                         // console.log(dtLabelLine[10]);
                     $("#pie-chart").click(function (evt) {
                           var activePoints = piechart.getElementsAtEvent(evt);
