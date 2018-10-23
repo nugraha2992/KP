@@ -33,7 +33,7 @@ class HomeController extends Controller
             ->groupBy('NamaUnit')
             ->orderBy('NamaUnit')
             ->get()->toArray();
-        // print_r(Carbon::now()->startofMonth()->subMonth()->endOfMonth()->toDateString());
+        // print_r($this->statistikOSPAR());
         $dataNOA2 = DB::table('masters')->select(DB::raw('count(NO_REKENING) as norek'))->groupBy('NamaUnit')->orderBy('NamaUnit')->get()->toArray();
 
         return view('home')
@@ -57,9 +57,38 @@ class HomeController extends Controller
         return DB::select("SELECT NamaUnit,sum(Jml_Pinjaman) FROM 
         `masters` WHERE TglRealisasi BETWEEN 
         " . "'" . Carbon::now()->startofMonth()->subMonth()->toDateString() . "'" . " 
-        and " . "'" . Carbon::now()->startofMonth()->subMonth()->endOfMonth()->toDateString() . "'" . " GROUP by NamaUnit");
+        and " . "'" . Carbon::now()->startofMonth()->subMonth()->endOfMonth()->toDateString() . "'" . " GROUP by NamaUnit order by NamaUnit");
     }
 
+    public function statistikOSPARNominatif()
+    {
+        return DB::select("SELECT NamaUnit,sum(OS_Pokok) FROM 
+        `masters` WHERE TglRealisasi BETWEEN 
+        " . "'" . Carbon::now()->startofMonth()->subMonth()->toDateString() . "'" . " 
+        and " . "'" . Carbon::now()->startofMonth()->subMonth()->endOfMonth()->toDateString() . "'" . " and Pokok <> 0 and FT_Bunga <> 0   GROUP by NamaUnit order by NamaUnit");
+    }
+    public function statistikOSPAR()
+    {
+        return DB::select("select NamaUnit as 'Nama Unit', sum(OS_Pokok) as jumlah from masters WHERE FT_Pokok <> 0 and FT_Bunga <> 0 GROUP by NamaUnit order by NamaUnit");
+    }
+    public function statistikOSNPL()
+    {
+        return DB::table('masters')
+            ->select('NamaUnit', DB::raw('sum(OS_Pokok)'))
+            ->where(DB::raw('kolektibilitas="KL" or kolektibilitas="M" or kolektibilitas="D" or kolektibilitas="L"'))
+            ->groupBy('NamaUnit')
+            ->orderBy('NamaUnit')
+            ->get()->toArray();
+    }
+    public function statistikOSKOL()
+    {
+        return DB::table('masters')
+            ->select('NamaUnit', DB::raw('sum(OS_Pokok)'))
+            ->where(DB::raw('kolektibilitas="KL" or kolektibilitas="M" or kolektibilitas="D" or kolektibilitas="L"'))
+            ->groupBy('NamaUnit')
+            ->orderBy('NamaUnit')
+            ->get()->toArray();
+    }
     public function masuk()
     {
         Redirect('/login');
