@@ -33,7 +33,7 @@ class HomeController extends Controller
             ->groupBy('NamaUnit')
             ->orderBy('NamaUnit')
             ->get()->toArray();
-        // print_r($this->statistikOSPAR());
+        // print_r($this->statistikOSNPL());
         $dataNOA2 = DB::table('masters')->select(DB::raw('count(NO_REKENING) as norek'))->groupBy('NamaUnit')->orderBy('NamaUnit')->get()->toArray();
 
         return view('home')
@@ -44,7 +44,7 @@ class HomeController extends Controller
             ->with('statistikOSNominatif', json_encode(array_column($this->statistikOSNominatif(), 'jumlah'), JSON_NUMERIC_CHECK))
             ->with('statistikOSPAR', array_column($this->statistikOSPAR(), 'jumlah'))
             ->with('statistikOSPARNominatif', json_encode(array_column($this->statistikOSPARNominatif(), 'jumlah'), JSON_NUMERIC_CHECK))
-            ->with('statistikOSNPL', json_encode(array_column($this->statistikOSNPL(), 'jumlah'), JSON_NUMERIC_CHECK))
+            ->with('statistikOSNPL', array_column($this->statistikOSNPL(), 'jumlah'))
             ->with('statistikOSKOL', array_column($this->statistikOSKOL(), 'jumlah'), JSON_NUMERIC_CHECK);
     }
     public function statistikos()
@@ -78,12 +78,8 @@ class HomeController extends Controller
     }
     public function statistikOSNPL()
     {
-        return DB::table('masters')
-            ->select('NamaUnit', DB::raw('sum(OS_Pokok) as jumlah'))
-            ->where(DB::raw('kolektibilitas="KL" or kolektibilitas="M" or kolektibilitas="D" or kolektibilitas="L"'))
-            ->groupBy('NamaUnit')
-            ->orderBy('NamaUnit')
-            ->get()->toArray();
+        return
+            DB::select("select sum(OS_Pokok) as jumlah from masters WHERE kolektibilitas='KL' or kolektibilitas='M' or kolektibilitas='D' or kolektibilitas='L' GROUP by NamaUnit order by NamaUnit");
     }
     public function statistikOSKOL()
     {

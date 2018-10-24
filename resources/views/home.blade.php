@@ -142,7 +142,7 @@
 
 			    </div>
 
-			<div class="col-md-6">
+			<div class="col-md-12">
 
 				<!-- Default box -->
 				<div class="box">
@@ -154,7 +154,7 @@
 						</div>
 					</div>
                     <div class="box-body">
-                     <canvas id="npl-chart" width="50%" height="10%"></canvas>
+                     <canvas id="npl-chart" width="50%" height="15%"></canvas>
 					</div>       
 				</div>
 				<!-- /.box -->
@@ -181,7 +181,7 @@
 				<!-- /.box -->
 
 			    </div>
-			<div class="col-md-6">
+			<div class="col-md-12">
 
 				<!-- Default box -->
 				<div class="box">
@@ -196,11 +196,9 @@
                      <canvas id="osnplb1-chart" width="50%" height="10%"></canvas>
 					</div>       
 				</div>
-				<!-- /.box -->
-
 			    </div>
 		</div>
-        <div class="row">
+        <!-- <div class="row">
 			<div class="col-md-6">
 				<div class="box">
 					<div class="box-header with-border">
@@ -216,8 +214,6 @@
 				</div>
 			    </div>
 			<div class="col-md-6">
-
-				<!-- Default box -->
 				<div class="box">
 					<div class="box-header with-border">
 						<h3 class="box-title">2t</h3>
@@ -233,7 +229,7 @@
 				<!-- /.box -->
 
 			    </div>
-		</div>
+		</div> -->
 </div>
 @endsection
  <script src=https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js charset=utf-8></script>
@@ -329,23 +325,7 @@
                                     getRandomColorHex(),
                                     getRandomColorHex(),
                                     getRandomColorHex(),
-                                ],
-                                borderColor: [
-                                    "#ffd",
-                                    "#ffd",
-                                    "#ffd",
-                                    "#ffd",
-                                    "#ffd",
-                                    "#ffd",
-                                    "#ffd",
-                                    "#ffd",
-                                    "#ffd",
-                                    "#ffd",
-                                    "#ffd",
-                                    "#ffd",
-                                    "#ffd",
-                                ],
-                                borderWidth: 1
+                                ]
                                 }]
                             },
                             options: {
@@ -357,7 +337,7 @@
                                 }
                             }
                         });
-                        var piechart = new Chart(document.getElementById("Par-chart"), {
+                        var parchart = new Chart(document.getElementById("Par-chart"), {
                             type: 'bar',
                             data: {
                                 labels: dtLabelPie,
@@ -381,23 +361,7 @@
                                     getRandomColorHex(),
                                     getRandomColorHex(),
                                     getRandomColorHex(),
-                                ],
-                                borderColor: [
-                                    "#ffd",
-                                    "#ffd",
-                                    "#ffd",
-                                    "#ffd",
-                                    "#ffd",
-                                    "#ffd",
-                                    "#ffd",
-                                    "#ffd",
-                                    "#ffd",
-                                    "#ffd",
-                                    "#ffd",
-                                    "#ffd",
-                                    "#ffd",
-                                ],
-                                borderWidth: 1
+                                ]
                                 }]
                             },
                             options: {
@@ -407,6 +371,55 @@
                                 title: {
                                     display: true,
                                     text: 'data OS PAR tiap Unit'
+                                },
+                                scales: {
+                                    xAxes: [{
+                                        stacked: false,
+                                        beginAtZero: true,
+                                        ticks: {
+                                            stepSize: 1,
+                                            min: 0,
+                                            autoSkip: false
+                                        }
+                                    }]
+                                }
+                            }
+                        });
+
+                        var nplchart = new Chart(document.getElementById("npl-chart"), {
+                            type: 'bar',
+                            data: {
+                                labels: dtLabelPie,
+                                datasets: [{
+                                    label: "(RP.) Miliar",
+                                    data: <?php $nplarray = array_map(function ($num) {
+                                                return number_format($num / 1000000000, 2);
+                                            }, $statistikOSNPL);
+                                            echo json_encode($nplarray); ?> ,
+                                    backgroundColor: [
+                                    getRandomColorHex(),
+                                    getRandomColorHex(),
+                                    getRandomColorHex(),
+                                    getRandomColorHex(),
+                                    getRandomColorHex(),
+                                    getRandomColorHex(),
+                                    getRandomColorHex(),
+                                    getRandomColorHex(),
+                                    getRandomColorHex(),
+                                    getRandomColorHex(),
+                                    getRandomColorHex(),
+                                    getRandomColorHex(),
+                                    getRandomColorHex(),
+                                ]
+                                }]
+                            },
+                            options: {
+                                legend: {
+                                    display: false
+                                },
+                                title: {
+                                    display: true,
+                                    text: 'data OS NPL tiap Unit'
                                 },
                                 scales: {
                                     xAxes: [{
