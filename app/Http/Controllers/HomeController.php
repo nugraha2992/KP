@@ -33,7 +33,7 @@ class HomeController extends Controller
             ->groupBy('NamaUnit')
             ->orderBy('NamaUnit')
             ->get()->toArray();
-        print_r(Carbon::now()->startofMonth()->toDateString());
+        // print_r(Carbon::now()->startofMonth()->toDateString());
         $dataNOA2 = DB::table('masters')->select(DB::raw('count(NO_REKENING) as norek'))->groupBy('NamaUnit')->orderBy('NamaUnit')->get()->toArray();
 
         return view('home')
@@ -44,6 +44,7 @@ class HomeController extends Controller
             ->with('statistikOSNominatif', array_column($this->statistikOSNominatif(), 'jumlah'), JSON_NUMERIC_CHECK)
             ->with('statistikOSPAR', array_column($this->statistikOSPAR(), 'jumlah'))
             ->with('statistikOSPARNominatif', json_encode(array_column($this->statistikOSPARNominatif(), 'jumlah'), JSON_NUMERIC_CHECK))
+            ->with('statistikOSNPLLengkap', array_column($this->statistikOSNPLlengkap(), 'jumlah'))
             ->with('statistikOSNPL', array_column($this->statistikOSNPL(), 'jumlah'))
             ->with('statistikOSKOL', array_column($this->statistikOSKOL(), 'jumlah'), JSON_NUMERIC_CHECK)
             ->with('statistikOSNPLNominatif', array_column($this->statistikOSNPLNominatif(), 'jumlah'), JSON_NUMERIC_CHECK);
@@ -93,6 +94,12 @@ class HomeController extends Controller
             " . "'" . Carbon::now()->startofMonth()->toDateString() . "'" . " 
             and " . "'" . Carbon::now()->startofMonth()->endOfMonth()->toDateString() . "'" . "
              and (kolektibilitas='KL' or kolektibilitas='M' or kolektibilitas='D' or kolektibilitas='L')   GROUP by NamaUnit order by NamaUnit");
+    }
+    public function statistikOSNPLlengkap()
+    {
+        return
+            DB::select("SELECT sum(OS_Pokok) as jumlah FROM 
+            `masters` WHERE (kolektibilitas='KL' or kolektibilitas='M' or kolektibilitas='D' or kolektibilitas='L')   GROUP by NamaUnit order by NamaUnit");
     }
     public function statistikOSKOL()
     {

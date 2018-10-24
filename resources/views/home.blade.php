@@ -396,7 +396,7 @@
                                     label: "(RP.) Miliar",
                                     data: <?php $nplarray = array_map(function ($num) {
                                                 return number_format($num / 1000000000, 2);
-                                            }, $statistikOSNPL);
+                                            }, $statistikOSNPLLengkap);
                                             echo json_encode($nplarray); ?> ,
                                     backgroundColor: [
                                     getRandomColorHex(),
