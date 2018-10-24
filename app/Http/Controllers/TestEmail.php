@@ -20,9 +20,9 @@ class TestEmail extends Mailable
 
     public function build()
     {
-        $address = 'crylikebaby2992@gmail.com';
-        $subject = 'This is a demo!';
-        $name = 'Jane Doe';
+        $address = 'adminpnm@pnm.com';
+        $subject = 'do not reply - Laporan Kinerja AOM!';
+        $name = 'Admin PNM';
 
         return $this->view('email')
             ->from($address, $name)
@@ -30,6 +30,7 @@ class TestEmail extends Mailable
             ->bcc($address, $name)
             ->replyTo($address, $name)
             ->subject($subject)
+            ->attach($this->data['filename'])
             ->with(['message' => $this->data['message']]);
     }
 }

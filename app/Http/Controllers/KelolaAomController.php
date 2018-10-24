@@ -7,7 +7,10 @@ use DB;
 use Illuminate\Support\Facades\Redirect;
 use App\Mail\TestEmail;
 use PDF;
+use Mail;
 use Carbon\Carbon;
+use Spatie\Permission\Models\Role;
+use App\User;
 
 class KelolaAomController extends Controller
 {
@@ -49,8 +52,24 @@ class KelolaAomController extends Controller
 
     public function kirimEmailSemua()
     {
-        $data = ['message' => 'This is a test!'];
-        Mail::to($email)->send(new TestEmail($data));
+        $data = $this->statistikAOM();
+        $pdf = PDF::loadView('printKelolaAom', $data);
+        $filenamepath = storage_path() . str_replace(":", "-", str_replace(" ", "-", Carbon::now()->toDateTimeString())) . '.pdf';
+        $pdf->save($filenamepath);
+        $data = [
+            'message' => 'silahkan download file ',
+            'filename' => $filenamepath
+        ];
+        $roles = Role::all();
+        $users = \App\User::with('roles')->get();
+        $nonmembers = User::whereHas("roles", function ($q) {
+            $q->where("name", "AOM");
+        })->get();
+        foreach ($nonmembers as $u) {
+            Mail::to($u->email)->send(new TestEmail($data));
+        // print_r($nonmembers);
+        }
+
     }
 
     public function export_pdf()

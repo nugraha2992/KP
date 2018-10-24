@@ -175,7 +175,9 @@
 						</div>
 					</div>
                     <div class="box-body">
-                     <canvas id="osparb1-chart" width="50%" height="10%"></canvas>
+                    <canvas id="osparb1-chart" width="50%" height="15%"></canvas>
+
+                     <!-- <canvas id="osparb1-chart" width="50%" height="10%"></canvas> -->
 					</div>       
 				</div>
 				<!-- /.box -->
@@ -193,7 +195,7 @@
 						</div>
 					</div>
                     <div class="box-body">
-                     <canvas id="osnplb1-chart" width="50%" height="10%"></canvas>
+                     <canvas id="osnplb1-chart" width="50%" height="15%"></canvas>
 					</div>       
 				</div>
 			    </div>
@@ -468,7 +470,91 @@
                                 
                             }
                         });
+                        var osparb1 = new Chart(document.getElementById("osparb1-chart"), {
+                            type: 'bar',
+                            data: {
+                                labels: dtLabel,
+                                datasets: [{
+                                    label: "OS PAR B-1",
+                                    backgroundColor: "#8e5ea2",
+                                    data: <?php $formatted_array = array_map(function ($num) {
+                                                return number_format($num / 1000000000, 2);
+                                            }, $statistikOSNominatif);
+                                            echo json_encode($formatted_array); ?>
+                                }, {
+                                    label: "OS PAR",
+                                    backgroundColor: "#3e95cd",
+                                    data: <?php $formatted_array = array_map(function ($num) {
+                                                return number_format($num / 1000000000, 2);
+                                            }, $statistikOSPAR);
+                                            echo json_encode($formatted_array); ?>
+                                }]
+                            },
+                            options: {
+                                legend: {
+                                    display: false
+                                },
+                                title: {
+                                    display: true,
+                                    text: ''
+                                },
+                                scales: {
+                                    xAxes: [{
+                                        stacked: false,
+                                        beginAtZero: true,
+                                        ticks: {
+                                            stepSize: 1,
+                                            min: 0,
+                                            autoSkip: false
+                                        }
+                                    }]
+                                }
+                                
+                            }
+                        });
 
+                        var osnplb1 = new Chart(document.getElementById("osnplb1-chart"), {
+                            type: 'bar',
+                            data: {
+                                labels: dtLabel,
+                                datasets: [{
+                                    label: "OS NPL B-1",
+                                    backgroundColor: "#8e5ea2",
+                                    data: <?php $formatted_array = array_map(function ($num) {
+                                                return number_format($num / 1000000000, 2);
+                                            }, $statistikOSNPLNominatif);
+                                            echo json_encode($formatted_array); ?>
+                                }, {
+                                    label: "OS NPL",
+                                    backgroundColor: "#3e95cd",
+                                    data: <?php $formatted_array = array_map(function ($num) {
+                                                return number_format($num / 1000000000, 2);
+                                            }, $statistikOSNPL);
+                                            echo json_encode($formatted_array); ?>
+                                }]
+                            },
+                            options: {
+                                legend: {
+                                    display: false
+                                },
+                                title: {
+                                    display: true,
+                                    text: ''
+                                },
+                                scales: {
+                                    xAxes: [{
+                                        stacked: false,
+                                        beginAtZero: true,
+                                        ticks: {
+                                            stepSize: 1,
+                                            min: 0,
+                                            autoSkip: false
+                                        }
+                                    }]
+                                }
+                                
+                            }
+                        });
                          function getRandomColorHex() {
                              var hex = "0123456789ABCDEF",
                                  color = "#";
