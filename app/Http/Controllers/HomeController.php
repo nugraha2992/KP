@@ -40,7 +40,12 @@ class HomeController extends Controller
             ->with('chartLabel', json_encode(array_column($dataNOA, 'NamaUnit'), JSON_NUMERIC_CHECK))
             ->with('chartData', json_encode(array_column($dataNOA2, 'norek'), JSON_NUMERIC_CHECK))
             ->with('OSData', json_encode(array_column($this->statistikos(), 'jumlahOS'), JSON_NUMERIC_CHECK))
-            ->with('OSLancar', json_encode(array_column($this->statistikLancar(), 'jumlahLancar'), JSON_NUMERIC_CHECK));
+            ->with('OSLancar', json_encode(array_column($this->statistikLancar(), 'jumlahLancar'), JSON_NUMERIC_CHECK))
+            ->with('statistikOSNominatif', json_encode(array_column($this->statistikOSNominatif(), 'jumlah'), JSON_NUMERIC_CHECK))
+            ->with('statistikOSPAR', array_column($this->statistikOSPAR(), 'jumlah'))
+            ->with('statistikOSPARNominatif', json_encode(array_column($this->statistikOSPARNominatif(), 'jumlah'), JSON_NUMERIC_CHECK))
+            ->with('statistikOSNPL', json_encode(array_column($this->statistikOSNPL(), 'jumlah'), JSON_NUMERIC_CHECK))
+            ->with('statistikOSKOL', array_column($this->statistikOSKOL(), 'jumlah'), JSON_NUMERIC_CHECK);
     }
     public function statistikos()
     {
@@ -54,7 +59,7 @@ class HomeController extends Controller
 
     public function statistikOSNominatif()
     {
-        return DB::select("SELECT NamaUnit,sum(Jml_Pinjaman) FROM 
+        return DB::select("SELECT NamaUnit,sum(Jml_Pinjaman) as jumlah FROM 
         `masters` WHERE TglRealisasi BETWEEN 
         " . "'" . Carbon::now()->startofMonth()->subMonth()->toDateString() . "'" . " 
         and " . "'" . Carbon::now()->startofMonth()->subMonth()->endOfMonth()->toDateString() . "'" . " GROUP by NamaUnit order by NamaUnit");
@@ -62,10 +67,10 @@ class HomeController extends Controller
 
     public function statistikOSPARNominatif()
     {
-        return DB::select("SELECT NamaUnit,sum(OS_Pokok) FROM 
+        return DB::select("SELECT NamaUnit,sum(OS_Pokok) as jumlah FROM 
         `masters` WHERE TglRealisasi BETWEEN 
         " . "'" . Carbon::now()->startofMonth()->subMonth()->toDateString() . "'" . " 
-        and " . "'" . Carbon::now()->startofMonth()->subMonth()->endOfMonth()->toDateString() . "'" . " and Pokok <> 0 and FT_Bunga <> 0   GROUP by NamaUnit order by NamaUnit");
+        and " . "'" . Carbon::now()->startofMonth()->subMonth()->endOfMonth()->toDateString() . "'" . " and FT_Pokok <> 0 and FT_Bunga <> 0   GROUP by NamaUnit order by NamaUnit");
     }
     public function statistikOSPAR()
     {
@@ -74,7 +79,7 @@ class HomeController extends Controller
     public function statistikOSNPL()
     {
         return DB::table('masters')
-            ->select('NamaUnit', DB::raw('sum(OS_Pokok)'))
+            ->select('NamaUnit', DB::raw('sum(OS_Pokok) as jumlah'))
             ->where(DB::raw('kolektibilitas="KL" or kolektibilitas="M" or kolektibilitas="D" or kolektibilitas="L"'))
             ->groupBy('NamaUnit')
             ->orderBy('NamaUnit')
@@ -83,8 +88,8 @@ class HomeController extends Controller
     public function statistikOSKOL()
     {
         return DB::table('masters')
-            ->select('NamaUnit', DB::raw('sum(OS_Pokok)'))
-            ->where(DB::raw('kolektibilitas="KL" or kolektibilitas="M" or kolektibilitas="D" or kolektibilitas="L"'))
+            ->select('NamaUnit', DB::raw('sum(OS_Pokok) as jumlah'))
+            ->where(DB::raw('kolektibilitas="PK"'))
             ->groupBy('NamaUnit')
             ->orderBy('NamaUnit')
             ->get()->toArray();

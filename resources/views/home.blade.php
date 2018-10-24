@@ -6,7 +6,6 @@
 @section('content')
 <div class="row">
 			<div class="col-md-12">
-
 				<!-- Default box -->
 				<div class="box">
 					<div class="box-header with-border">
@@ -116,7 +115,7 @@
 						</div>
 					</div>
                     <div class="box-body">
-                     <canvas id="bar-chart" width="50%" height="10%"></canvas>
+                     <canvas id="bar-chart" width="50%" height="15%"></canvas>
 					</div>       
 				</div>
 				<!-- /.box -->
@@ -126,23 +125,41 @@
 @endcan
     <div class="row">
 			<div class="col-md-12">
-
 				<!-- Default box -->
 				<div class="box">
 					<div class="box-header with-border">
-						<h3 class="box-title">1</h3>
+						<h3 class="box-title">Laporan Data OS Par</h3>
 						<div class="box-tools pull-right">
 							<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
 								<i class="fa fa-minus"></i></button>
 						</div>
 					</div>
                     <div class="box-body">
-                     <canvas id="bar-chart" width="50%" height="10%"></canvas>
+                     <canvas id="Par-chart" width="50%" height="15%"></canvas>
 					</div>       
 				</div>
 				<!-- /.box -->
 
 			    </div>
+
+			<div class="col-md-6">
+
+				<!-- Default box -->
+				<div class="box">
+					<div class="box-header with-border">
+						<h3 class="box-title">Laporan Data OS NPL</h3>
+						<div class="box-tools pull-right">
+							<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+								<i class="fa fa-minus"></i></button>
+						</div>
+					</div>
+                    <div class="box-body">
+                     <canvas id="npl-chart" width="50%" height="10%"></canvas>
+					</div>       
+				</div>
+				<!-- /.box -->
+
+			</div>
 		</div>
 
         <div class="row">
@@ -151,35 +168,32 @@
 				<!-- Default box -->
 				<div class="box">
 					<div class="box-header with-border">
-						<h3 class="box-title">2t</h3>
+						<h3 class="box-title">Laporan OS PAR VS -B1</h3>
 						<div class="box-tools pull-right">
 							<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
 								<i class="fa fa-minus"></i></button>
 						</div>
 					</div>
                     <div class="box-body">
-                     <canvas id="bar-chart" width="50%" height="10%"></canvas>
+                     <canvas id="osparb1-chart" width="50%" height="10%"></canvas>
 					</div>       
 				</div>
 				<!-- /.box -->
 
 			    </div>
-		</div>
-
-        <div class="row">
-			<div class="col-md-12">
+			<div class="col-md-6">
 
 				<!-- Default box -->
 				<div class="box">
 					<div class="box-header with-border">
-						<h3 class="box-title">3</h3>
+						<h3 class="box-title">Laporan OS NPL VS -B1</h3>
 						<div class="box-tools pull-right">
 							<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
 								<i class="fa fa-minus"></i></button>
 						</div>
 					</div>
                     <div class="box-body">
-                     <canvas id="bar-chart" width="50%" height="10%"></canvas>
+                     <canvas id="osnplb1-chart" width="50%" height="10%"></canvas>
 					</div>       
 				</div>
 				<!-- /.box -->
@@ -187,29 +201,7 @@
 			    </div>
 		</div>
         <div class="row">
-			<div class="col-md-12">
-
-				<!-- Default box -->
-				<div class="box">
-					<div class="box-header with-border">
-						<h3 class="box-title">2t</h3>
-						<div class="box-tools pull-right">
-							<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
-								<i class="fa fa-minus"></i></button>
-						</div>
-					</div>
-                    <div class="box-body">
-                     <canvas id="bar-chart" width="50%" height="10%"></canvas>
-					</div>       
-				</div>
-				<!-- /.box -->
-
-			    </div>
-		</div>
-        <div class="row">
-			<div class="col-md-12">
-
-				<!-- Default box -->
+			<div class="col-md-6">
 				<div class="box">
 					<div class="box-header with-border">
 						<h3 class="box-title">2t</h3>
@@ -222,72 +214,8 @@
                      <canvas id="bar-chart" width="50%" height="10%"></canvas>
 					</div>       
 				</div>
-				<!-- /.box -->
-
 			    </div>
-		</div>
-        <div class="row">
-			<div class="col-md-12">
-
-				<!-- Default box -->
-				<div class="box">
-					<div class="box-header with-border">
-						<h3 class="box-title">2t</h3>
-						<div class="box-tools pull-right">
-							<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
-								<i class="fa fa-minus"></i></button>
-						</div>
-					</div>
-                    <div class="box-body">
-                     <canvas id="bar-chart" width="50%" height="10%"></canvas>
-					</div>       
-				</div>
-				<!-- /.box -->
-
-			    </div>
-		</div>
-        <div class="row">
-			<div class="col-md-12">
-
-				<!-- Default box -->
-				<div class="box">
-					<div class="box-header with-border">
-						<h3 class="box-title">2t</h3>
-						<div class="box-tools pull-right">
-							<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
-								<i class="fa fa-minus"></i></button>
-						</div>
-					</div>
-                    <div class="box-body">
-                     <canvas id="bar-chart" width="50%" height="10%"></canvas>
-					</div>       
-				</div>
-				<!-- /.box -->
-
-			    </div>
-		</div>
-        <div class="row">
-			<div class="col-md-12">
-
-				<!-- Default box -->
-				<div class="box">
-					<div class="box-header with-border">
-						<h3 class="box-title">2t</h3>
-						<div class="box-tools pull-right">
-							<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
-								<i class="fa fa-minus"></i></button>
-						</div>
-					</div>
-                    <div class="box-body">
-                     <canvas id="bar-chart" width="50%" height="10%"></canvas>
-					</div>       
-				</div>
-				<!-- /.box -->
-
-			    </div>
-		</div>
-        <div class="row">
-			<div class="col-md-12">
+			<div class="col-md-6">
 
 				<!-- Default box -->
 				<div class="box">
@@ -315,7 +243,7 @@
             $(document).ready(function () {
                         var dtLabel = <?php echo $chartLabel; ?>;
                         var dtDATA = <?php echo $chartData; ?>;
-                        new Chart(document.getElementById("bar-chart"), {
+                        var chartbar = new Chart(document.getElementById("bar-chart"), {
                             type: 'bar',
                             data: {
                                 labels: dtLabel,
@@ -376,8 +304,8 @@
                                 }
                             }
                         });
-                    
-
+                        
+                        
                         var dtLabelPie = <?php echo $chartLabel; ?>;
                         var dtDATAPie = <?php echo $chartData; ?>;
                         var piechart = new Chart(document.getElementById("pie-chart"), {
@@ -426,11 +354,73 @@
                                 },
                                 title: {
                                     display: true,
-                                    text: ''
                                 }
                             }
                         });
-
+                        var piechart = new Chart(document.getElementById("Par-chart"), {
+                            type: 'bar',
+                            data: {
+                                labels: dtLabelPie,
+                                datasets: [{
+                                    label: "(RP.) Miliar",
+                                    data: <?php $formatted_array = array_map(function ($num) {
+                                                return number_format($num / 1000000000, 2);
+                                            }, $statistikOSPAR);
+                                            echo json_encode($formatted_array); ?> ,
+                                    backgroundColor: [
+                                    getRandomColorHex(),
+                                    getRandomColorHex(),
+                                    getRandomColorHex(),
+                                    getRandomColorHex(),
+                                    getRandomColorHex(),
+                                    getRandomColorHex(),
+                                    getRandomColorHex(),
+                                    getRandomColorHex(),
+                                    getRandomColorHex(),
+                                    getRandomColorHex(),
+                                    getRandomColorHex(),
+                                    getRandomColorHex(),
+                                    getRandomColorHex(),
+                                ],
+                                borderColor: [
+                                    "#ffd",
+                                    "#ffd",
+                                    "#ffd",
+                                    "#ffd",
+                                    "#ffd",
+                                    "#ffd",
+                                    "#ffd",
+                                    "#ffd",
+                                    "#ffd",
+                                    "#ffd",
+                                    "#ffd",
+                                    "#ffd",
+                                    "#ffd",
+                                ],
+                                borderWidth: 1
+                                }]
+                            },
+                            options: {
+                                legend: {
+                                    display: false
+                                },
+                                title: {
+                                    display: true,
+                                    text: 'data OS PAR tiap Unit'
+                                },
+                                scales: {
+                                    xAxes: [{
+                                        stacked: false,
+                                        beginAtZero: true,
+                                        ticks: {
+                                            stepSize: 1,
+                                            min: 0,
+                                            autoSkip: false
+                                        }
+                                    }]
+                                }
+                            }
+                        });
                         var dtLabelLine = <?php echo $chartLabel; ?>;
                         var dtDATALine = <?php echo $OSData; ?>;
                         var Linechart = new Chart(document.getElementById('line-chart'), {
