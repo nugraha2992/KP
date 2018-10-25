@@ -241,7 +241,7 @@
             $(document).ready(function () {
                         var dtLabel = <?php echo $chartLabel; ?>;
                         var dtDATA = <?php echo $chartData; ?>;
-                        var chartbar = new Chart(document.getElementById("bar-chart"), {
+                        var chartbar = new Chart(document.getElementById("bar-chart"), {//bar chart 
                             type: 'bar',
                             data: {
                                 labels: dtLabel,

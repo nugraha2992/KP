@@ -16,7 +16,7 @@
 @section('sidebar-menu')
 <ul class="sidebar-menu">
    <li class="header">MAIN NAVIGATOR</li>
-  @hasrole('bisnis')
+ 
   <li>
     <a href="{{ route('home') }}">
       <i class="fa fa-area-chart"></i>
@@ -35,7 +35,6 @@
       <span>Eksport Data</span>
     </a>
   </li>
-  @endhasrole
 
   @hasrole('admin')
   <li>
