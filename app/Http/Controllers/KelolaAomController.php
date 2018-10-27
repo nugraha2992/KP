@@ -11,6 +11,7 @@ use Mail;
 use Carbon\Carbon;
 use Spatie\Permission\Models\Role;
 use App\User;
+use Form;
 
 class KelolaAomController extends Controller
 {
@@ -42,16 +43,34 @@ class KelolaAomController extends Controller
     public function statistikAOM()
     {
         return DB::table('masters')->select(DB::raw('Id_Account_Management as aom, COUNT(NO_REKENING) noa, sum(Jml_Pinjaman) jumlah'))
-            ->whereRaw('Jml_Pinjaman > 0 and TipeKredit <> "3R" and Id_Account_Management is not null')->groupBy('Id_Account_Management')->orderBy('jumlah', 'desc')->paginate(10);
+            ->whereRaw('Jml_Pinjaman >= 0 and TipeKredit <> "3R" and (Id_Account_Management is not null) and TglRealisasi BETWEEN "' .
+                Carbon::now()->startofMonth()->toDateString() . '" and "' . Carbon::now()->startofMonth()->endOfMonth()->toDateString() . '" ')
+            ->groupBy('Id_Account_Management')->orderBy('jumlah', 'desc')->paginate(10);
     }
     public function statistikAOM2()
     {
         return DB::table('masters')->select(DB::raw('Id_Account_Management as aom, COUNT(NO_REKENING) noa, sum(Jml_Pinjaman) jumlah'))
-            ->whereRaw('Jml_Pinjaman > 0 and TipeKredit <> "3R" and Id_Account_Management is not null')->groupBy('Id_Account_Management')->orderBy('jumlah', 'asc')->paginate(1000);
+            ->whereRaw('Jml_Pinjaman >= 0 and TipeKredit <> "3R" and (Id_Account_Management is not null) and TglRealisasi BETWEEN "' .
+                Carbon::now()->startofMonth()->toDateString() . '" and "' . Carbon::now()->startofMonth()->endOfMonth()->toDateString() . '" ')
+            ->groupBy('Id_Account_Management')->orderBy('jumlah', 'desc')->paginate(1000);
+    }
+
+    public function statistikAOM3($awal, $akhir)
+    {
+        return DB::table('masters')->select(DB::raw('Id_Account_Management as aom, COUNT(NO_REKENING) noa, sum(Jml_Pinjaman) jumlah'))
+            ->whereRaw('Jml_Pinjaman >= 0 and TipeKredit <> "3R" and (Id_Account_Management is not null) and TglRealisasi BETWEEN "' .
+                str_replace("-", "/", $awal) . '" and "' . str_replace("-", "/", $akhir) . '" ')
+            ->groupBy('Id_Account_Management')->orderBy('jumlah', 'desc')->paginate(10);
     }
 //SELECT Id_Account_Management as aom, COUNT(NO_REKENING) noa, sum(Jml_Pinjaman) jumlah FROM `masters` WHERE Jml_Pinjaman > 0 and TipeKredit <> ' 3 R' and Id_Account_Management is not null GROUP by Id_Account_Management
-
-
+    public function cariDariTanggal(Request $request, $awal, $akhir)
+    {
+        $dataAOM = $this->statistikAOM3($awal, $akhir);
+        // print_r();
+        return view('kelolaAom')
+            ->with('data', $dataAOM)
+            ->with('i', ($request->input('page', 1) - 1) * 5);
+    }
     public function kirimEmailSemua()
     {
         $data['data'] = $this->statistikAOM2();

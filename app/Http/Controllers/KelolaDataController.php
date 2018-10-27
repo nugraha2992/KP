@@ -26,9 +26,13 @@ class KelolaDataController extends Controller
      */
     public function index()
     {
-        return view('import');
-    }
 
+        return view('import')->with('data', $data);
+    }
+    public function getTanggalUpload()
+    {
+
+    }
     /**
      * Show the form for creating a new resource.
      *

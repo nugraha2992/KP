@@ -16,7 +16,8 @@ try {
   require("fastclick");
 
   require("icheck");
-
+  require('daterangepicker');
+  require('moment');
   // bootstrap-datepicker
   require("bootstrap-datepicker");
 
@@ -75,9 +76,13 @@ $(document).ready(function () {
     todayHighlight: true
   });
 
-  $("#bangsadhayam").click(function () {
-    alert("negacicalaka");
+  $('input[name="daterange"]').daterangepicker({
+    opens: 'left'
+  }, function (start, end, label) {
+    window.location.href = "/kelolaaom/" +
+      start.format('YYYY-MM-DD') + '/' + end.format('YYYY-MM-DD');
   });
+
 
 
 });

@@ -13,6 +13,16 @@
                         <i class="fa fa-minus"></i></button>
                 </div>
             </div>
+            <div class="row">
+            <div class="col-lg-12" >
+
+            <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group pull-right">    
+                <span><Label class="baru">Cari Dari:</Label><input type="text" class="form-control form-inline" name="daterange" value="01/01/2018 - 01/12/2018" /></span>
+            </div>
+            </div>
+            </div>
+            </div>
             <div class="box-body">
                 <div class="col-lg-12 margin-tb">
                     <div class="pull-left">
@@ -50,5 +60,10 @@
         </div>
     </div>
 </div>
-
+<style>
+.ui-datepicker {
+    /*background: transparent;*/
+    background: blue;
+}
+</style>
 @endsection
