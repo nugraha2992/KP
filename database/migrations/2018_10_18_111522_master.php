@@ -83,6 +83,7 @@ class Master extends Migration
             $table->string('NamaCabang', 256)->nullable(true);
             $table->string('Kota_ID', 10)->nullable(true);
             $table->string('Angsuran_Ke', 10)->nullable(true);
+            $table->timestamps();
         });
     }
 
