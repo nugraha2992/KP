@@ -24,6 +24,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     // Route::group(['middleware' => ['auth', 'role:AOM']], function () {
     Route::get('/kelolaaom', 'KelolaAomController@index')->name('aom');
+    Route::get('/emailkeaom', 'KelolaAomController@kirimEmailSemua')->name('emailaom');
     // Route::get('/', 'KelolaAomController@index');
     // Route::get('/home', 'KelolaAomController@index')->name('home');
     // });
