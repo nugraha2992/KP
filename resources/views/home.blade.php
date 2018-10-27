@@ -3,6 +3,7 @@
 @section('content-title', 'Home')
 @section('content-subtitle', 'Dashboard')
 
+<!--  -->
 @section('content')
 <div class="row">
 			<div class="col-md-12">
@@ -439,35 +440,35 @@
                         var dtLabelLine = <?php echo $chartLabel; ?>;
                         var dtDATALine = <?php echo $OSData; ?>;
                         var Linechart = new Chart(document.getElementById('line-chart'), {
-                            type: 'line',
+                            type: 'doughnut',
                             data: {
                                 labels: dtLabelLine,
                                 datasets: [{
-                                    label: "",
                                     data: dtDATALine,
-                                    borderColor: "#3e95cd",
+                                    backgroundColor: [
+                                    getRandomColorHex(),
+                                    getRandomColorHex(),
+                                    getRandomColorHex(),
+                                    getRandomColorHex(),
+                                    getRandomColorHex(),
+                                    getRandomColorHex(),
+                                    getRandomColorHex(),
+                                    getRandomColorHex(),
+                                    getRandomColorHex(),
+                                    getRandomColorHex(),
+                                    getRandomColorHex(),
+                                    getRandomColorHex(),
+                                    getRandomColorHex(),
+                                ],
                                 }]
                             },
-                            options: {
+                           options: {
                                 legend: {
                                     display: false
                                 },
                                 title: {
                                     display: true,
-                                    text: ''
-                                },
-                                scales: {
-                                    xAxes: [{
-                                        stacked: false,
-                                        beginAtZero: true,
-                                        ticks: {
-                                            stepSize: 1,
-                                            min: 0,
-                                            autoSkip: false
-                                        }
-                                    }]
                                 }
-                                
                             }
                         });
                         var osparb1 = new Chart(document.getElementById("osparb1-chart"), {

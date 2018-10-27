@@ -8,7 +8,7 @@
             <h2>Users Management</h2>
         </div>
         <div class="pull-right">
-            <a class="btn btn-success" href="{{ route('users.create') }}"> Create New User</a>
+            <a class="btn btn-success" href="{{ route('users.create') }}"> Tambah Pengguna</a>
         </div>
     </div>
 </div>
@@ -42,15 +42,16 @@
       @endif
     </td>
     <td>
-       <a class="btn btn-info" href="{{ route('users.show',$user->id) }}">Show</a>
-       <a class="btn btn-primary" href="{{ route('users.edit',$user->id) }}">Edit</a>
+       <a class="btn btn-info" href="{{ route('users.show',$user->id) }}">Tampil</a>
+       <a class="btn btn-primary" href="{{ route('users.edit',$user->id) }}">Ubah</a>
 
-        {!! Form::open(['method' => 'DELETE','route' => ['users.destroy', $user->id],'style'=>'display:inline']) !!}
-            {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
+        {!! Form::open(['method' => 'DELETE','route' => ['users.destroy', $user->id],'style'=>'display:inline','onsubmit' => 'return confirm("tekan OK untuk lanjutkan menghapus?");']) !!}
+            {!! Form::submit('Hapus', ['class' => 'btn btn-danger']) !!}
         {!! Form::close() !!}
     </td>
   </tr>
  @endforeach
+ 
 </table>
 
 

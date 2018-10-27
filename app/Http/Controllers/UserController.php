@@ -20,8 +20,17 @@ class UserController extends Controller
 
     public function create()
     {
-        $roles = Role::pluck('name')->all();
-        return view('users.create', compact('roles'));
+        $rolesAll = DB::select('select id,name from roles');
+        $roles = [];
+        foreach ($rolesAll as $k => $item) {
+            $roles[$item->id] = $item->name;
+        }
+
+        // print_r($array);
+        // $myarray = array_values($roles);
+        // dd($arrayslist);
+        // print_r($roles);
+        return view('users.create')->with('roles', $roles);
     }
 
     public function store(Request $request)
@@ -57,8 +66,7 @@ class UserController extends Controller
         $user = User::find($id);
         $roles = Role::pluck('name', 'name')->all();
         $userRole = $user->roles->pluck('name', 'name')->all();
-
-
+        // dd($userRole);
         return view('users.edit', compact('user', 'roles', 'userRole'));
     }
 
@@ -70,7 +78,6 @@ class UserController extends Controller
             'password' => 'same:confirm-password',
             'roles' => 'required'
         ]);
-
 
         $input = $request->all();
         if (!empty($input['password'])) {

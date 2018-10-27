@@ -11,6 +11,14 @@ use DB;
 
 class KelolaDataController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('permission:lihat-statistik');
+
+    }
+
     /**
      * Display a listing of the resource.
      *

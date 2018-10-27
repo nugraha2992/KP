@@ -64,7 +64,7 @@ if (token) {
 //     key: 'your-pusher-key'
 // });
 
-$(document).ready(function() {
+$(document).ready(function () {
   $(".i-checks").iCheck({
     checkboxClass: "icheckbox_square-blue",
     radioClass: "iradio_square-blue"
@@ -75,7 +75,9 @@ $(document).ready(function() {
     todayHighlight: true
   });
 
-  $("#bangsadhayam").click(function() {
+  $("#bangsadhayam").click(function () {
     alert("negacicalaka");
   });
+
+
 });

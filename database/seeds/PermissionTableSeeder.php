@@ -27,6 +27,8 @@ class PermissionTableSeeder extends Seeder
             'role-edit',
             'role-delete',
             'lihat-statistik',
+            'lihat-bisnis',
+            'lihat-admin',
             'kelola-aom',
             'import-data',
             'export-data',

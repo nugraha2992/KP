@@ -16,7 +16,7 @@
 @section('sidebar-menu')
 <ul class="sidebar-menu">
    <li class="header">MAIN NAVIGATOR</li>
- 
+@hasrole('bisnis')
   <li>
     <a href="{{ route('home') }}">
       <i class="fa fa-area-chart"></i>
@@ -35,18 +35,18 @@
       <span>Eksport Data</span>
     </a>
   </li>
-
+@endhasrole
   @hasrole('admin')
   <li>
     <a href="{{ route('users.index') }}">
       <i class="fa fa-user"></i>
-      <span>Kelola User</span>
+      <span>Kelola Pengguna</span>
     </a>
   </li>
   <li>
-    <a href="{{ route('roles.index') }}">
+    <a href="{{ route('aom') }}">
       <i class="fa fa-user"></i>
-      <span>Kelola Role</span>
+      <span>Kelola AOM</span>
     </a>
   </li>
   <li>
