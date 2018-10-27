@@ -33,6 +33,7 @@ class KelolaAomController extends Controller
     public function index(Request $request)
     {
         $dataAOM = $this->statistikAOM();
+        // print_r();
         return view('kelolaAom')
             ->with('data', $dataAOM)
             ->with('i', ($request->input('page', 1) - 1) * 5);
@@ -43,12 +44,17 @@ class KelolaAomController extends Controller
         return DB::table('masters')->select(DB::raw('Id_Account_Management as aom, COUNT(NO_REKENING) noa, sum(Jml_Pinjaman) jumlah'))
             ->whereRaw('Jml_Pinjaman > 0 and TipeKredit <> "3R" and Id_Account_Management is not null')->groupBy('Id_Account_Management')->orderBy('jumlah', 'desc')->paginate(10);
     }
+    public function statistikAOM2()
+    {
+        return DB::table('masters')->select(DB::raw('Id_Account_Management as aom, COUNT(NO_REKENING) noa, sum(Jml_Pinjaman) jumlah'))
+            ->whereRaw('Jml_Pinjaman > 0 and TipeKredit <> "3R" and Id_Account_Management is not null')->groupBy('Id_Account_Management')->orderBy('jumlah', 'asc')->paginate(1000);
+    }
 //SELECT Id_Account_Management as aom, COUNT(NO_REKENING) noa, sum(Jml_Pinjaman) jumlah FROM `masters` WHERE Jml_Pinjaman > 0 and TipeKredit <> ' 3 R' and Id_Account_Management is not null GROUP by Id_Account_Management
 
 
     public function kirimEmailSemua()
     {
-        $data = $this->statistikAOM();
+        $data['data'] = $this->statistikAOM2();
         $pdf = PDF::loadView('printKelolaAom', $data);
         $filenamepath = storage_path() . str_replace(":", "-", str_replace(" ", "-", Carbon::now()->toDateTimeString())) . '.pdf';
         $pdf->save($filenamepath);
@@ -65,7 +71,7 @@ class KelolaAomController extends Controller
             Mail::to($u->email)->send(new TestEmail($data));
         }
 
-        return redirect('aom');
+        return redirect('/kelolaaom');
     }
 
     public function export_pdf()
