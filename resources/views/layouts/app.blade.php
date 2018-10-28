@@ -29,12 +29,12 @@
       <span>Kelola Geolokasi</span>
     </a>
   </li>
-  <li>
+  <!-- <li>
     <a href="{{ route('eksport') }}">
       <i class="fa  fa-download"></i>
       <span>Eksport Data</span>
     </a>
-  </li>
+  </li> -->
 @endhasrole
   @hasrole('admin')
   <li>
