@@ -1,5 +1,6 @@
 @extends('layouts.app')
-
+@section('content-title', 'Import Data')
+@section('content-subtitle', 'Detail')
 @section('content')
 <div class="container-fluid spark-screen">
     <div class="row">

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content-title', 'Home')
-@section('content-subtitle', 'Dashboard')
+@section('content-subtitle', 'Dashboard - Geolokasi')
 
 @section('content')
 <div class="row">
