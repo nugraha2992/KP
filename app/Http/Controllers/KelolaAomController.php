@@ -59,6 +59,10 @@ class KelolaAomController extends Controller
 
     public function statistikAOM3($awal, $akhir)
     {
+        if ($awal == null && $akhir == null) {
+            $akhir = Carbon::now()->startofMonth()->endOfMonth()->toDateString();
+            $awal = Carbon::now()->startofMonth()->toDateString();
+        }
         return DB::table('masters')->select(DB::raw('Id_Account_Management as aom, COUNT(NO_REKENING) noa, sum(Jml_Pinjaman) jumlah'))
             ->whereRaw('Jml_Pinjaman >= 0 and TipeKredit <> "3R" and (Id_Account_Management is not null) and TglRealisasi BETWEEN "' .
                 str_replace("-", "/", $awal) . '" and "' . str_replace("-", "/", $akhir) . '" ')
@@ -67,6 +71,10 @@ class KelolaAomController extends Controller
 //SELECT Id_Account_Management as aom, COUNT(NO_REKENING) noa, sum(Jml_Pinjaman) jumlah FROM `masters` WHERE Jml_Pinjaman > 0 and TipeKredit <> ' 3 R' and Id_Account_Management is not null GROUP by Id_Account_Management
     public function cariDariTanggal(Request $request, $awal, $akhir)
     {
+        if ($awal == null && $akhir == null) {
+            $akhir = Carbon::now()->startofMonth()->endOfMonth()->toDateString();
+            $awal = Carbon::now()->startofMonth()->toDateString();
+        }
         $dataAOM = $this->statistikAOM3($awal, $akhir);
         return view('kelolaAom')
             ->with('awal', $awal)->with('akhir', $akhir)
@@ -79,24 +87,25 @@ class KelolaAomController extends Controller
         if ($awal == null && $akhir == null) {
             $akhir = Carbon::now()->startofMonth()->endOfMonth()->toDateString();
             $awal = Carbon::now()->startofMonth()->toDateString();
+        } else {
+            $data['data'] = $this->statistikAOM3($awal, $akhir);
+            $pdf = PDF::loadView('printKelolaAom', $data);
+            $filenamepath = storage_path() . str_replace(":", "-", str_replace(" ", "-", Carbon::now()->toDateTimeString())) . '.pdf';
+            $pdf->save($filenamepath);
+            $data = [
+                'message' => 'silahkan download file ',
+                'filename' => $filenamepath
+            ];
+            $roles = Role::all();
+            $users = \App\User::with('roles')->get();
+            $nonmembers = User::whereHas("roles", function ($q) {
+                $q->where("name", "AOM");
+            })->get();
+            foreach ($nonmembers as $u) {
+                Mail::to($u->email)->send(new EmailNotification($data));
+            }
+            return redirect('/kelolaaom');
         }
-        $data['data'] = $this->statistikAOM3($awal, $akhir);
-        $pdf = PDF::loadView('printKelolaAom', $data);
-        $filenamepath = storage_path() . str_replace(":", "-", str_replace(" ", "-", Carbon::now()->toDateTimeString())) . '.pdf';
-        $pdf->save($filenamepath);
-        $data = [
-            'message' => 'silahkan download file ',
-            'filename' => $filenamepath
-        ];
-        $roles = Role::all();
-        $users = \App\User::with('roles')->get();
-        $nonmembers = User::whereHas("roles", function ($q) {
-            $q->where("name", "AOM");
-        })->get();
-        foreach ($nonmembers as $u) {
-            Mail::to($u->email)->send(new EmailNotification($data));
-        }
-        return redirect('/kelolaaom');
     }
 
     public function export_pdf()
