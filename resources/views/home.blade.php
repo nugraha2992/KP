@@ -35,14 +35,14 @@
                                 <span class="info-box-icon"><i class="fa fa-money" style="margin-top:20px;"></i></span>
 
                                 <div class="info-box-content">
-                                <span class="info-box-text">OS</span>
+                                <span class="info-box-text">NOM</span>
                                 <span class="info-box-number">{{ "Rp. ". number_format(array_sum(json_decode ($OSData))/1000000000, 2) ." M"  }}</span>
 
                                 <div class="progress">
                                     <div class="progress-bar" style="width:100%"></div>
                                 </div>
                                 <span class="progress-description">
-                                        Outstanding Total
+                                        Lending NOM 
                                     </span>
                                 </div>
                                 </div>

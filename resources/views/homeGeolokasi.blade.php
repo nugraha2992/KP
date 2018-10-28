@@ -49,7 +49,7 @@
                       return function() {
                         infowindow.setContent(locations[i][0]);
                         infowindow.open(map, marker);
-                        alert(locations[i][0]);
+                        // alert(locations[i][0]);
                       }
                     })(marker, i));
                   }
