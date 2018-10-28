@@ -38,6 +38,7 @@ class HomeController extends Controller
             ->with('chartLabel', json_encode(array_column($dataNOA, 'NamaUnit'), JSON_NUMERIC_CHECK))
             ->with('chartData', json_encode(array_column($dataNOA2, 'norek'), JSON_NUMERIC_CHECK))
             ->with('OSData', json_encode(array_column($this->statistikos(), 'jumlahOS'), JSON_NUMERIC_CHECK))
+            ->with('NOMData', json_encode(array_column($this->statistiknom(), 'jumlahNOM'), JSON_NUMERIC_CHECK))
             ->with('OSLancar', json_encode(array_column($this->statistikLancar(), 'jumlahLancar'), JSON_NUMERIC_CHECK))
             ->with('statistikOSNominatif', array_column($this->statistikOSNominatif(), 'jumlah'), JSON_NUMERIC_CHECK)
             ->with('statistikOSPAR', array_column($this->statistikOSPAR(), 'jumlah'))
@@ -49,33 +50,38 @@ class HomeController extends Controller
             ->with('statistikOSKOLNormatif', array_column($this->statistikOSKOLNormatif(), 'jumlah'))
             ->with('statistikOSNPLNominatif', array_column($this->statistikOSNPLNominatif(), 'jumlah'), JSON_NUMERIC_CHECK);
     }
-    public function eksport()
+    public function statistiknom()
     {
-        $dataNOA = DB::table('masters')
-            ->select('NamaUnit')
-            ->groupBy('NamaUnit')
-            ->orderBy('NamaUnit')
-            ->get()->toArray();
-        $dataNOA2 = DB::table('masters')->select(DB::raw('count(NO_REKENING) as norek'))->groupBy('NamaUnit')->orderBy('NamaUnit')->get()->toArray();
-        $dataTotal = (object)array(
-            'NamaUnit' => array_column($dataNOA, 'NamaUnit'),
-            'NOA' => array_column($dataNOA2, 'norek'),
-            'OS' => array_column($this->statistikos(), 'jumlahOS'),
-            'Lancar' => array_column($this->statistikLancar(), 'jumlahLancar'),
-            'OSb' => array_column($this->statistikOSNominatif(), 'jumlah'),
-            'Par' => array_column($this->statistikOSPAR(), 'jumlah'),
-            'Parb' => array_column($this->statistikOSPARNominatif(), 'jumlah'),
-            'NPL' => array_column($this->statistikOSNPLlengkap(), 'jumlah'),
-            'OSNPL' => array_column($this->statistikOSNPL(), 'jumlah'),
-            'KOL' => array_column($this->statistikOSKOL(), 'jumlah'),
-            'KOLb' => array_column($this->statistikOSKOLNormatif(), 'jumlah'),
-            'NPLb' => array_column($this->statistikOSNPLNominatif(), 'jumlah'),
-            'KOLL' => array_column($this->statistikOSNPLlengkap(), 'jumlah')
-        );
-        // print_r($dataTotal);
-        return view('eksport', compact($dataTotal))
-            ->with('i', 1);
+        return DB::table('masters')->select(DB::raw('sum(Jml_Pinjaman) as jumlahNOM'))->groupBy('NamaUnit')->orderBy('NamaUnit')->get()->toArray();
     }
+
+    // public function eksport()
+    // {
+    //     $dataNOA = DB::table('masters')
+    //         ->select('NamaUnit')
+    //         ->groupBy('NamaUnit')
+    //         ->orderBy('NamaUnit')
+    //         ->get()->toArray();
+    //     $dataNOA2 = DB::table('masters')->select(DB::raw('count(NO_REKENING) as norek'))->groupBy('NamaUnit')->orderBy('NamaUnit')->get()->toArray();
+    //     $dataTotal = (object)array(
+    //         'NamaUnit' => array_column($dataNOA, 'NamaUnit'),
+    //         'NOA' => array_column($dataNOA2, 'norek'),
+    //         'OS' => array_column($this->statistikos(), 'jumlahOS'),
+    //         'Lancar' => array_column($this->statistikLancar(), 'jumlahLancar'),
+    //         'OSb' => array_column($this->statistikOSNominatif(), 'jumlah'),
+    //         'Par' => array_column($this->statistikOSPAR(), 'jumlah'),
+    //         'Parb' => array_column($this->statistikOSPARNominatif(), 'jumlah'),
+    //         'NPL' => array_column($this->statistikOSNPLlengkap(), 'jumlah'),
+    //         'OSNPL' => array_column($this->statistikOSNPL(), 'jumlah'),
+    //         'KOL' => array_column($this->statistikOSKOL(), 'jumlah'),
+    //         'KOLb' => array_column($this->statistikOSKOLNormatif(), 'jumlah'),
+    //         'NPLb' => array_column($this->statistikOSNPLNominatif(), 'jumlah'),
+    //         'KOLL' => array_column($this->statistikOSNPLlengkap(), 'jumlah')
+    //     );
+    //     // print_r($dataTotal);
+    //     return view('eksport', compact($dataTotal))
+    //         ->with('i', 1);
+    // }
     public function statistikos()
     {
         return DB::table('masters')->select(DB::raw('sum(OS_Pokok) as jumlahOS'))->groupBy('NamaUnit')->orderBy('NamaUnit')->get()->toArray();
