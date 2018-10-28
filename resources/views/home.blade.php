@@ -15,13 +15,16 @@
 					    <div class="box-body">
                             <div class="col-md-4">
                                 <div class="info-box bg-purple">
-                                    <span class="info-box-icon"><i class="ion ion-ios-person-outline"></i></span>
+                                    <span class="info-box-icon"><i class="fa fa-user" style="margin-top:20px;"></i></span>
                                     <div class="info-box-content">
                                     <span class="info-box-text">NOA</span>
                                     <span class="info-box-number">{{ array_sum(json_decode ($chartData)) }}</span>
                                     <div class="progress">
-                                        <div class="progress-bar" style="width: 50%"></div>
+                                        <div class="progress-bar" style="width:100%"></div>
                                     </div>
+                                    <span class="progress-description">
+                                        Jumlah Nasabah
+                                    </span>
                                     </div>
                                 </div>
 					        </div>
@@ -29,17 +32,17 @@
                             <div class="col-md-4">
                                 <!-- Info Boxes Style 2 -->
                             <div class="info-box bg-green">
-                                <span class="info-box-icon"><i class="fa fa-money"></i></span>
+                                <span class="info-box-icon"><i class="fa fa-money" style="margin-top:20px;"></i></span>
 
                                 <div class="info-box-content">
                                 <span class="info-box-text">OS</span>
                                 <span class="info-box-number">{{ "Rp. ". number_format(array_sum(json_decode ($OSData))/1000000000, 2) ." M"  }}</span>
 
                                 <div class="progress">
-                                    <div class="progress-bar" style="width: 50%"></div>
+                                    <div class="progress-bar" style="width:100%"></div>
                                 </div>
                                 <span class="progress-description">
-                                        
+                                        Outstanding Total
                                     </span>
                                 </div>
                                 </div>
@@ -47,14 +50,15 @@
                             <div class="col-md-4">
                                 <!-- Info Boxes Style 2 -->
                             <div class="info-box bg-blue">
-                                <span class="info-box-icon"><i class="ion ion-ios-pricetag-outline"></i></span>
+                                <span class="info-box-icon"><i class="fa fa-sort" style="margin-top:20px;"></i></span>
                                 <div class="info-box-content">
-                                <span class="info-box-text">Jumlah Lancar</span>
-                                <span class="info-box-number">{{ "Rp. ".array_sum(json_decode ($OSLancar)) }}</span>
+                                <span class="info-box-text">OS Lancar</span>
+                                <span class="info-box-number">{{ "Rp. ". number_format(array_sum(json_decode ($OSLancar))/1000000000, 2) ." M"  }}</span>
                                 <div class="progress">
-                                    <div class="progress-bar" style="width: 0%"></div>
+                                    <div class="progress-bar" style="width:1000%"></div>
                                 </div>
                                 <span class="progress-description">
+                                    Outstanding Lancar
                                     </span>
                                 </div>
                                 </div>

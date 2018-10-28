@@ -31,7 +31,7 @@
   </li>
   <li>
     <a href="{{ route('home') }}">
-      <i class="fa fa-map-marker"></i>
+      <i class="fa  fa-download"></i>
       <span>Eksport Data</span>
     </a>
   </li>

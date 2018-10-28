@@ -53,7 +53,7 @@ class HomeController extends Controller
 
     public function statistikLancar()
     {
-        return DB::table('masters')->select(DB::raw('sum(OS_Pokok) as jumlahLancar'))->where(DB::raw(' kolektibilitas = "L"'))->groupBy('NamaUnit')->orderBy('NamaUnit')->get()->toArray();
+        return DB::select('SELECT sum(OS_Pokok) as jumlahLancar FROM `masters` WHERE kolektibilitas = "L" GROUP by NamaUnit ORDER BY NamaUnit');
     }
 
     public function statistikOSNominatif()
@@ -111,10 +111,7 @@ class HomeController extends Controller
             ->orderBy('NamaUnit')
             ->get()->toArray();
     }
-    public function landing()
-    {
-        return view("welcome");
-    }
+
     public function masuk()
     {
         Redirect('/login');
