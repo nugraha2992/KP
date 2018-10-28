@@ -39,7 +39,7 @@ class KelolaAomController extends Controller
         $dataAOM = $this->statistikAOM();
         return view('kelolaAom')->with('awal', $this->DefaultAwal)->with('akhir', $this->DefaultAkhir)
             ->with('data', $dataAOM)
-            ->with('i', ($request->input('page', 1) - 1) * 5);
+            ->with('i', ($request->input('page', 1) - 1) * 10);
 
     }
     public function statistikAOM()
