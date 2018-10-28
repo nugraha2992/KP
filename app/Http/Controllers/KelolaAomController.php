@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use Illuminate\Support\Facades\Redirect;
-use App\Mail\TestEmail;
+use App\Mail\EmailNotification;
 use PDF;
 use Mail;
 use Carbon\Carbon;
@@ -25,7 +25,6 @@ class KelolaAomController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('permission:kelola-aom');
         $this->DefaultAwal = Carbon::now()->startofMonth()->toDateString();
         $this->DefaultAkhir = Carbon::now()->startofMonth()->endOfMonth()->toDateString();
     }
@@ -77,7 +76,7 @@ class KelolaAomController extends Controller
     }
     public function kirimEmailSemua($awal, $akhir)
     {
-        if ($awal == null || $akhir = null) {
+        if ($awal == null && $akhir == null) {
             $akhir = Carbon::now()->startofMonth()->endOfMonth()->toDateString();
             $awal = Carbon::now()->startofMonth()->toDateString();
         }
@@ -95,7 +94,7 @@ class KelolaAomController extends Controller
             $q->where("name", "AOM");
         })->get();
         foreach ($nonmembers as $u) {
-            Mail::to($u->email)->send(new TestEmail($data));
+            Mail::to($u->email)->send(new EmailNotification($data));
         }
         return redirect('/kelolaaom');
     }

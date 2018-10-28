@@ -100,7 +100,6 @@ class KelolaDataController extends Controller
 
     public function import(Request $request)
     {
-        ini_set('max_execution_time', 360);
         $dateinit = \Carbon\Carbon::parse($request->dateini);
         $datefim = \Carbon\Carbon::parse($request->datefim);
         $this->validate($request, array(
