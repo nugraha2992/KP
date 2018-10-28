@@ -64,7 +64,8 @@ if (token) {
 //     broadcaster: 'pusher',
 //     key: 'your-pusher-key'
 // });
-
+var mulai;
+var akhir;
 $(document).ready(function () {
   $(".i-checks").iCheck({
     checkboxClass: "icheckbox_square-blue",
@@ -81,6 +82,9 @@ $(document).ready(function () {
   }, function (start, end, label) {
     window.location.href = "/kelolaaom/" +
       start.format('YYYY-MM-DD') + '/' + end.format('YYYY-MM-DD');
+    // mulai = start.format('YYYY-MM-DD');
+    // akhir = end.format('YYYY-MM-DD');
+    console.log(mulai + "  " + akhir);
   });
 
 

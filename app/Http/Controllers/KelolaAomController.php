@@ -15,6 +15,8 @@ use Form;
 
 class KelolaAomController extends Controller
 {
+
+    public static $start, $end;
     /**
      * Create a new controller instance.
      *
@@ -34,7 +36,7 @@ class KelolaAomController extends Controller
     public function index(Request $request)
     {
         $dataAOM = $this->statistikAOM();
-        // print_r();
+        dd(KelolaAomController::$start);
         return view('kelolaAom')
             ->with('data', $dataAOM)
             ->with('i', ($request->input('page', 1) - 1) * 5);
@@ -65,11 +67,13 @@ class KelolaAomController extends Controller
 //SELECT Id_Account_Management as aom, COUNT(NO_REKENING) noa, sum(Jml_Pinjaman) jumlah FROM `masters` WHERE Jml_Pinjaman > 0 and TipeKredit <> ' 3 R' and Id_Account_Management is not null GROUP by Id_Account_Management
     public function cariDariTanggal(Request $request, $awal, $akhir)
     {
+        KelolaAomController::$start = $awal;
+        KelolaAomController::$end = $akhir;
         $dataAOM = $this->statistikAOM3($awal, $akhir);
-        // print_r();
         return view('kelolaAom')
             ->with('data', $dataAOM)
             ->with('i', ($request->input('page', 1) - 1) * 5);
+
     }
     public function kirimEmailSemua()
     {
@@ -98,6 +102,13 @@ class KelolaAomController extends Controller
         $data = $this->statistikAOM();
         $pdf = PDF::loadView('printKelolaAom', $data);
         $pdf->save(storage_path() . str_replace(":", "-", str_replace(" ", "-", Carbon::now()->toDateTimeString())) . '.pdf');
-        // return $pdf->download('customers.pdf');
+        return $pdf->download('PeringkatAOM.pdf');
+    }
+    public function export_pdfDownload($awal, $akhir)
+    {
+        $data = $this->statistikAOM3($awal, $akhir);
+        $pdf = PDF::loadView('printKelolaAom', $data);
+        $pdf->save(storage_path() . str_replace(":", "-", str_replace(" ", "-", Carbon::now()->toDateTimeString())) . '.pdf');
+        return $pdf->download('PeringkatAOM.pdf');
     }
 }
