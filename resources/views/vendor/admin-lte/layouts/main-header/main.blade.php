@@ -1,5 +1,5 @@
 <header class="main-header">
-
+<link rel="icon" href="https://is4-ssl.mzstatic.com/image/thumb/Purple115/v4/94/72/c1/9472c132-dc35-fbfd-68db-a5df41dba275/source/60x60bb.jpg">
   <!-- Logo -->
   <a href="/" class="logo">
     @section('logo-mini')
