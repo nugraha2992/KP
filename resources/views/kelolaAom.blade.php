@@ -53,7 +53,7 @@
                 {{ $data->links() }} 
                  @hasrole('admin')
                     <div class="pull-right">
-                        <a class="btn btn-info" target="_blank" href="{{ route('eksportAom') }}"> Ekspor ke PDF</a>
+                        <a class="btn btn-info" target="_blank" href="{{ route('cetakpdf',['awal'=> $awal,'akhir'=>$akhir]) }}"> Ekspor ke PDF</a>
                     </div>
                     @endhasrole
             </div>

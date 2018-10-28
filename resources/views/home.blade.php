@@ -71,8 +71,8 @@
     <!-- end column md 12  -->
 	    </div>
     <!-- end row -->
+     @can('lihat-noa-unit')
       <div class="row">
-       @can('lihat-noa-unit')
         <div class="col-md-6">
           <!-- Default box -->
           <div class="box">

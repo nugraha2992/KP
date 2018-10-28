@@ -16,7 +16,7 @@ use Form;
 class KelolaAomController extends Controller
 {
 
-    public static $start, $end;
+    public $DefaultAwal, $DefaultAkhir;
     /**
      * Create a new controller instance.
      *
@@ -26,6 +26,8 @@ class KelolaAomController extends Controller
     {
         $this->middleware('auth');
         $this->middleware('permission:kelola-aom');
+        $this->DefaultAwal = Carbon::now()->startofMonth()->toDateString();
+        $this->DefaultAkhir = Carbon::now()->startofMonth()->endOfMonth()->toDateString();
     }
 
     /**
@@ -36,8 +38,7 @@ class KelolaAomController extends Controller
     public function index(Request $request)
     {
         $dataAOM = $this->statistikAOM();
-        dd(KelolaAomController::$start);
-        return view('kelolaAom')
+        return view('kelolaAom')->with('awal', $this->DefaultAwal)->with('akhir', $this->DefaultAkhir)
             ->with('data', $dataAOM)
             ->with('i', ($request->input('page', 1) - 1) * 5);
 
@@ -67,17 +68,20 @@ class KelolaAomController extends Controller
 //SELECT Id_Account_Management as aom, COUNT(NO_REKENING) noa, sum(Jml_Pinjaman) jumlah FROM `masters` WHERE Jml_Pinjaman > 0 and TipeKredit <> ' 3 R' and Id_Account_Management is not null GROUP by Id_Account_Management
     public function cariDariTanggal(Request $request, $awal, $akhir)
     {
-        KelolaAomController::$start = $awal;
-        KelolaAomController::$end = $akhir;
         $dataAOM = $this->statistikAOM3($awal, $akhir);
         return view('kelolaAom')
+            ->with('awal', $awal)->with('akhir', $akhir)
             ->with('data', $dataAOM)
             ->with('i', ($request->input('page', 1) - 1) * 5);
 
     }
-    public function kirimEmailSemua()
+    public function kirimEmailSemua($awal, $akhir)
     {
-        $data['data'] = $this->statistikAOM2();
+        if ($awal == null || $akhir = null) {
+            $akhir = Carbon::now()->startofMonth()->endOfMonth()->toDateString();
+            $awal = Carbon::now()->startofMonth()->toDateString();
+        }
+        $data['data'] = $this->statistikAOM3($awal, $akhir);
         $pdf = PDF::loadView('printKelolaAom', $data);
         $filenamepath = storage_path() . str_replace(":", "-", str_replace(" ", "-", Carbon::now()->toDateTimeString())) . '.pdf';
         $pdf->save($filenamepath);
@@ -93,7 +97,6 @@ class KelolaAomController extends Controller
         foreach ($nonmembers as $u) {
             Mail::to($u->email)->send(new TestEmail($data));
         }
-
         return redirect('/kelolaaom');
     }
 
@@ -106,6 +109,10 @@ class KelolaAomController extends Controller
     }
     public function export_pdfDownload($awal, $akhir)
     {
+        if ($awal == null && $akhir == null) {
+            $akhir = Carbon::now()->startofMonth()->endOfMonth()->toDateString();
+            $awal = Carbon::now()->startofMonth()->toDateString();
+        }
         $data = $this->statistikAOM3($awal, $akhir);
         $pdf = PDF::loadView('printKelolaAom', $data);
         $pdf->save(storage_path() . str_replace(":", "-", str_replace(" ", "-", Carbon::now()->toDateTimeString())) . '.pdf');

@@ -1,4 +1,4 @@
-webpackJsonp([2],{
+webpackJsonp([0],{
 
 /***/ "./node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.js":
 /***/ (function(module, exports, __webpack_require__) {
@@ -24407,7 +24407,8 @@ if (token) {
 //     broadcaster: 'pusher',
 //     key: 'your-pusher-key'
 // });
-
+var mulai;
+var akhir;
 $(document).ready(function () {
   $(".i-checks").iCheck({
     checkboxClass: "icheckbox_square-blue",
@@ -24423,6 +24424,9 @@ $(document).ready(function () {
     opens: 'left'
   }, function (start, end, label) {
     window.location.href = "/kelolaaom/" + start.format('YYYY-MM-DD') + '/' + end.format('YYYY-MM-DD');
+    // mulai = start.format('YYYY-MM-DD');
+    // akhir = end.format('YYYY-MM-DD');
+    console.log(mulai + "  " + akhir);
   });
 });
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__("./node_modules/jquery/dist/jquery.js"), __webpack_require__("./node_modules/jquery/dist/jquery.js")))
