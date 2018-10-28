@@ -42,10 +42,9 @@ Route::group(['middleware' => ['auth']], function () {
         // Route::get()->name('statLendingNOA');
     });
 
-
     // Route::group(['middleware' => ['auth', 'role:AOM']], function () {
     Route::get('/kelolaaom', 'KelolaAomController@index')->name('aom');
-    Route::get('/emailkeaom', 'KelolaAomController@kirimEmailSemua')->name('emailaom');
+    Route::get('/emailkeaom/{awal}/{akhir}', 'KelolaAomController@kirimEmailSemua')->name('emailaom');
     Route::get('/kelolaaom/{awal}/{akhir}', 'KelolaAomController@cariDariTanggal')->name('tglaom');
     Route::get('/kelolaaom/cetakpdf/{awal}/{akhir}', 'KelolaAomController@export_pdfDownload')->name('cetakpdf');
     Route::get('/kelolaaom/cetakpdf/{awal}/{akhir}', 'KelolaAomController@export_pdfDownload')->name('cetakpdf');

@@ -30,7 +30,7 @@
                     </div>
                     @hasrole('admin')
                     <div class="pull-right">
-                        <a class="btn btn-success" href="{{ route('emailaom') }}"> Kirim Email Ke Semua</a>
+                        <a class="btn btn-success" href="{{ route('emailaom',['awal'=> $awal,'akhir'=>$akhir]) }}"> Kirim Email Ke Semua</a>
                     </div>
                     @endhasrole
                 </div>
