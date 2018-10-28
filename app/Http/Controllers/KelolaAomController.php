@@ -62,7 +62,7 @@ class KelolaAomController extends Controller
         return DB::table('masters')->select(DB::raw('Id_Account_Management as aom, COUNT(NO_REKENING) noa, sum(Jml_Pinjaman) jumlah'))
             ->whereRaw('Jml_Pinjaman >= 0 and TipeKredit <> "3R" and (Id_Account_Management is not null) and TglRealisasi BETWEEN "' .
                 str_replace("-", "/", $awal) . '" and "' . str_replace("-", "/", $akhir) . '" ')
-            ->groupBy('Id_Account_Management')->orderBy('jumlah', 'desc');
+            ->groupBy('Id_Account_Management')->orderBy('jumlah', 'desc')->paginate(30);
     }
 //SELECT Id_Account_Management as aom, COUNT(NO_REKENING) noa, sum(Jml_Pinjaman) jumlah FROM `masters` WHERE Jml_Pinjaman > 0 and TipeKredit <> ' 3 R' and Id_Account_Management is not null GROUP by Id_Account_Management
     public function cariDariTanggal(Request $request, $awal, $akhir)
@@ -71,7 +71,7 @@ class KelolaAomController extends Controller
         return view('kelolaAom')
             ->with('awal', $awal)->with('akhir', $akhir)
             ->with('data', $dataAOM)
-            ->with('i', ($request->input('page', 1) - 1) * 10);
+            ->with('i', ($request->input('page', 1) - 1) * 30);
 
     }
     public function kirimEmailSemua($awal, $akhir)
