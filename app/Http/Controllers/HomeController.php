@@ -111,6 +111,10 @@ class HomeController extends Controller
             ->orderBy('NamaUnit')
             ->get()->toArray();
     }
+    public function landing()
+    {
+        return view("welcome");
+    }
     public function masuk()
     {
         Redirect('/login');

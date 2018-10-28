@@ -24,7 +24,7 @@
     </a>
   </li>
   <li>
-    <a href="{{ route('home') }}">
+    <a href="{{ route('geolokasi') }}">
       <i class="fa fa-map-marker"></i>
       <span>Kelola Geolokasi</span>
     </a>

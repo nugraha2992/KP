@@ -15,7 +15,6 @@ class KelolaDataController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('permission:lihat-statistik');
 
     }
 
@@ -27,7 +26,7 @@ class KelolaDataController extends Controller
     public function index()
     {
 
-        return view('import')->with('data', $data);
+        return view('import');
     }
     public function getTanggalUpload()
     {

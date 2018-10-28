@@ -5,6 +5,9 @@ Route::get('/', 'HomeController@masuk');
 Route::group(['middleware' => ['auth']], function () {
     // Route::get('/', 'KelolaDataController@index');
     // Route::get('/home', 'KelolaDataController@index')->name('home');
+    Route::get('/', function () {
+        return view('welcome');
+    });
     Route::resource('roles', 'RoleController');
     Route::resource('users', 'UserController');
     Route::resource('products', 'ProductController');
@@ -15,10 +18,13 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/kelolaaom/coba', 'KelolaAomController@kirimEmailSemua')->name('email');
 
 
-    Route::group(['middleware' => ['auth', 'role:bisnis']], function () {
-        Route::get('/', 'HomeController@index');
-        Route::get('/home', 'HomeController@index')->name('home');
 
+    Route::group(['middleware' => ['auth', 'role:bisnis']], function () {
+
+        Route::get('/home', 'HomeController@index')->name('home');
+        Route::get('/geolokasi', function () {
+            return view("homeGeolokasi");
+        })->name('geolokasi');
     });
 
 

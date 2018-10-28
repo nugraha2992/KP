@@ -2,34 +2,49 @@
 
 @section('content-title', 'Home')
 @section('content-subtitle', 'Dashboard')
+<link rel="stylesheet" href="https://atlas.microsoft.com/sdk/css/atlas.min.css?api-version=1" type="text/css" />
 
 @section('content')
 <div class="row">
-  <div class="col-md-8 col-md-offset-2">
+  <div class="col-md-12">
     <div class="box box-primary">
       <div class="box-header">
         <h3 class="box-title">Dashboard</h3>
       </div>
       <div class="box-body">
-        pie kabare mase
 
-                  <!-- <div class="info-box bg-aqua">
-                    <span class="info-box-icon"><i class="fa fa-bookmark-o"></i></span>
+        <div id="googleMap" style="width:100%;height:400px;"></div>
 
-                    <div class="info-box-content">
-                      <span class="info-box-text">Bookmarks</span>
-                      <span class="info-box-number">41,410</span>
+        <script>
+        function myMap() {
+        var mapProp= {
+            center:new google.maps.LatLng(51.508742,-0.120850),
+            zoom:5,
+        };
+        var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
+        }
+        </script>
 
-                      <div class="progress">
-                        <div class="progress-bar" style="width: 70%"></div>
-                      </div>
-                      <span class="progress-description">
-                        70% Increase in 30 Days
-                      </span>
-                    </div>
-                  </div> -->
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAiXJUnB5HVCTFrkROCqd_3wmVnRrMyZD8&callback=myMap"></script>
       </div>
     </div>
   </div>
 </div>
 @endsection
+<script src="https://atlas.microsoft.com/sdk/js/atlas.min.js?api-version=1"></script>
+<script src="https://atlas.microsoft.com/sdk/js/atlas-service.min.js?api-version=1"></script>
+
+<style>
+  html,
+  body {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+  }
+
+  #map {
+    width: 100%;
+    height: 100%;
+  }
+</style>
