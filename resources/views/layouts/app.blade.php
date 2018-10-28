@@ -30,7 +30,7 @@
     </a>
   </li>
   <li>
-    <a href="{{ route('home') }}">
+    <a href="{{ route('eksport') }}">
       <i class="fa  fa-download"></i>
       <span>Eksport Data</span>
     </a>

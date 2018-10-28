@@ -181,8 +181,6 @@
 					</div>
                     <div class="box-body">
                     <canvas id="osparb1-chart" width="50%" height="15%"></canvas>
-
-                     <!-- <canvas id="osparb1-chart" width="50%" height="10%"></canvas> -->
 					</div>       
 				</div>
 				<!-- /.box -->
@@ -200,43 +198,43 @@
 						</div>
 					</div>
                     <div class="box-body">
-                     <canvas id="osnplb1-chart" width="50%" height="15%"></canvas>
+                     <canvas id="osnplb1-chart" width="60%" height="15%"></canvas>
 					</div>       
 				</div>
 			    </div>
 		</div>
-        <!-- <div class="row">
-			<div class="col-md-6">
+        <div class="row">
+			<div class="col-md-12">
 				<div class="box">
 					<div class="box-header with-border">
-						<h3 class="box-title">2t</h3>
+						<h3 class="box-title">Laporan Data KOL</h3>
+						<div class="box-tools pull-right">
+							<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+								<i class="fa fa-minus"></i></button>
+						</div>
+					</div>
+                    <div class="box-body" >
+                    <canvas id="kol-chart" width="50%" height="15%"></canvas>
+					</div>       
+				</div>
+			    </div>
+        </div>
+        <div class="row">
+			<div class="col-md-12">
+				<div class="box">
+					<div class="box-header with-border">
+						<h3 class="box-title">Laporan Data KOL VS -B1 </h3>
 						<div class="box-tools pull-right">
 							<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
 								<i class="fa fa-minus"></i></button>
 						</div>
 					</div>
                     <div class="box-body">
-                     <canvas id="bar-chart" width="50%" height="10%"></canvas>
+                     <canvas id="kolb1-chart" width="60%" height="15%"></canvas>
 					</div>       
 				</div>
 			    </div>
-			<div class="col-md-6">
-				<div class="box">
-					<div class="box-header with-border">
-						<h3 class="box-title">2t</h3>
-						<div class="box-tools pull-right">
-							<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
-								<i class="fa fa-minus"></i></button>
-						</div>
-					</div>
-                    <div class="box-body">
-                     <canvas id="bar-chart" width="50%" height="10%"></canvas>
-					</div>       
-				</div>
-				<!-- /.box -->
-
-			    </div>
-		</div> -->
+		</div>
 </div>
 @endsection
  <script src=https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js charset=utf-8></script>
@@ -275,7 +273,7 @@
                                 },
                                 title: {
                                     display: true,
-                                    text: 'data pendapatan NOA tiap Unit'
+                                    text: 'data pendapatan NOA setiap Unit'
                                 },
                                 scales: {
                                     xAxes: [{
@@ -360,7 +358,7 @@
                                 },
                                 title: {
                                     display: true,
-                                    text: 'data OS PAR tiap Unit'
+                                    text: 'data OS PAR setiap Unit'
                                 },
                                 scales: {
                                     xAxes: [{
@@ -409,7 +407,7 @@
                                 },
                                 title: {
                                     display: true,
-                                    text: 'data OS NPL tiap Unit'
+                                    text: 'data OS NPL settiap Unit'
                                 },
                                 scales: {
                                     xAxes: [{
@@ -424,6 +422,57 @@
                                 }
                             }
                         });
+
+                var kolchart = new Chart(document.getElementById("kol-chart"), {
+                                        type: 'bar',
+                                        data: {
+                                            labels: dtLabelPie,
+                                            datasets: [{
+                                                label: "(RP.) Miliar",
+                                                data: <?php $nplarray = array_map(function ($num) {
+                                                            return number_format($num / 1000000000, 2);
+                                                        }, $statistikOSKOLLengkap);
+                                                        echo json_encode($nplarray); ?> ,
+                                                backgroundColor: [
+                                                '#B40040',
+                                                '#00816F',
+                                                '#DBD800',
+                                                '#2D4C2D',
+                                                '#513F3F',
+                                                '#ADCF64',
+                                                '#13B72F',
+                                                '#CF816F',
+                                                '#DCAFF0',
+                                                '#AF483F',
+                                                '#CCAF3F',
+                                                '#EAFF21',
+                                                '#75D519',
+                                            ]
+                                            }]
+                                        },
+                                        options: {
+                                            legend: {
+                                                display: false
+                                            },
+                                            title: {
+                                                display: true,
+                                                text: 'data OS KOL setiap Unit'
+                                            },
+                                            scales: {
+                                                xAxes: [{
+                                                    stacked: false,
+                                                    beginAtZero: true,
+                                                    ticks: {
+                                                        stepSize: 1,
+                                                        min: 0,
+                                                        autoSkip: false
+                                                    }
+                                                }]
+                                            }
+                                        }
+                                    });
+
+
                         var dtLabelLine = <?php echo $chartLabel; ?>;
                         var dtDATALine = <?php echo $OSData; ?>;
                         var Linechart = new Chart(document.getElementById('line-chart'), {
@@ -459,22 +508,58 @@
                             }
                         });
                         var osparb1 = new Chart(document.getElementById("osparb1-chart"), {
-                            type: 'bar',
+                            type: 'horizontalBar',
                             data: {
                                 labels: dtLabel,
                                 datasets: [{
-                                    label: "OS PAR B-1",
+                                    label: "OS PAR B-1 (RP.) Miliar",
                                     backgroundColor: "#8e5ea2",
                                     data: <?php $formatted_array = array_map(function ($num) {
                                                 return number_format($num / 1000000000, 2);
                                             }, $statistikOSNominatif);
                                             echo json_encode($formatted_array); ?>
                                 }, {
-                                    label: "OS PAR",
+                                    label: "OS PAR (RP.) Miliar",
                                     backgroundColor: "#3e95cd",
                                     data: <?php $formatted_array = array_map(function ($num) {
                                                 return number_format($num / 1000000000, 2);
                                             }, $statistikOSPAR);
+                                            echo json_encode($formatted_array); ?>
+                                }]
+                            },
+                            options: {
+                                scales: {
+                                    xAxes: [{
+                                        stacked: true,
+                                        beginAtZero: true,
+                                        ticks: {
+                                            stepSize: 1,
+                                            min: 0,
+                                            autoSkip: false
+                                        }
+                                    }]
+                                }
+                                
+                            }
+                        });
+
+                        var osnplb1 = new Chart(document.getElementById("osnplb1-chart"), {
+                            type: 'horizontalBar',
+                            data: {
+                                labels: dtLabel,
+                                datasets: [{
+                                    label: "OS NPL B-1",
+                                    backgroundColor: "#8e5ea2",
+                                    data: <?php $formatted_array = array_map(function ($num) {
+                                                return number_format($num / 1000000000, 2);
+                                            }, $statistikOSNPLNominatif);
+                                            echo json_encode($formatted_array); ?>
+                                }, {
+                                    label: "OS NPL",
+                                    backgroundColor: "#3e95cd",
+                                    data: <?php $formatted_array = array_map(function ($num) {
+                                                return number_format($num / 1000000000, 2);
+                                            }, $statistikOSNPL);
                                             echo json_encode($formatted_array); ?>
                                 }]
                             },
@@ -500,24 +585,23 @@
                                 
                             }
                         });
-
-                        var osnplb1 = new Chart(document.getElementById("osnplb1-chart"), {
-                            type: 'bar',
+                        var osKOLb1 = new Chart(document.getElementById("kolb1-chart"), {
+                            type: 'horizontalBar',
                             data: {
                                 labels: dtLabel,
                                 datasets: [{
-                                    label: "OS NPL B-1",
+                                    label: "OS KOL B-1",
                                     backgroundColor: "#8e5ea2",
                                     data: <?php $formatted_array = array_map(function ($num) {
                                                 return number_format($num / 1000000000, 2);
-                                            }, $statistikOSNPLNominatif);
+                                            }, $statistikOSKOLNormatif);
                                             echo json_encode($formatted_array); ?>
                                 }, {
-                                    label: "OS NPL",
+                                    label: "OS KOL",
                                     backgroundColor: "#3e95cd",
                                     data: <?php $formatted_array = array_map(function ($num) {
                                                 return number_format($num / 1000000000, 2);
-                                            }, $statistikOSNPL);
+                                            }, $statistikOSKOL);
                                             echo json_encode($formatted_array); ?>
                                 }]
                             },

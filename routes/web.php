@@ -28,6 +28,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/geolokasi', function () {
             return view("homeGeolokasi");
         })->name('geolokasi');
+        Route::get('/eksport', 'HomeController@eksport')->name('eksport');
         // Route::get()->name('statNOA');
         // Route::get()->name('statNOM');
         // Route::get()->name('statdeltaOSNPLBUlan');

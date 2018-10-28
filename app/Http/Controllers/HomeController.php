@@ -33,7 +33,31 @@ class HomeController extends Controller
             ->orderBy('NamaUnit')
             ->get()->toArray();
         $dataNOA2 = DB::table('masters')->select(DB::raw('count(NO_REKENING) as norek'))->groupBy('NamaUnit')->orderBy('NamaUnit')->get()->toArray();
+
         return view('home')
+            ->with('chartLabel', json_encode(array_column($dataNOA, 'NamaUnit'), JSON_NUMERIC_CHECK))
+            ->with('chartData', json_encode(array_column($dataNOA2, 'norek'), JSON_NUMERIC_CHECK))
+            ->with('OSData', json_encode(array_column($this->statistikos(), 'jumlahOS'), JSON_NUMERIC_CHECK))
+            ->with('OSLancar', json_encode(array_column($this->statistikLancar(), 'jumlahLancar'), JSON_NUMERIC_CHECK))
+            ->with('statistikOSNominatif', array_column($this->statistikOSNominatif(), 'jumlah'), JSON_NUMERIC_CHECK)
+            ->with('statistikOSPAR', array_column($this->statistikOSPAR(), 'jumlah'))
+            ->with('statistikOSPARNominatif', json_encode(array_column($this->statistikOSPARNominatif(), 'jumlah'), JSON_NUMERIC_CHECK))
+            ->with('statistikOSNPLLengkap', array_column($this->statistikOSNPLlengkap(), 'jumlah'))
+            ->with('statistikOSKOLLengkap', array_column($this->statistikOSNPLlengkap(), 'jumlah'))
+            ->with('statistikOSNPL', array_column($this->statistikOSNPL(), 'jumlah'))
+            ->with('statistikOSKOL', array_column($this->statistikOSKOL(), 'jumlah'), JSON_NUMERIC_CHECK)
+            ->with('statistikOSKOLNormatif', array_column($this->statistikOSKOLNormatif(), 'jumlah'))
+            ->with('statistikOSNPLNominatif', array_column($this->statistikOSNPLNominatif(), 'jumlah'), JSON_NUMERIC_CHECK);
+    }
+    public function eksport()
+    {
+        $dataNOA = DB::table('masters')
+            ->select('NamaUnit')
+            ->groupBy('NamaUnit')
+            ->orderBy('NamaUnit')
+            ->get()->toArray();
+        $dataNOA2 = DB::table('masters')->select(DB::raw('count(NO_REKENING) as norek'))->groupBy('NamaUnit')->orderBy('NamaUnit')->get()->toArray();
+        return view('eksport')
             ->with('chartLabel', json_encode(array_column($dataNOA, 'NamaUnit'), JSON_NUMERIC_CHECK))
             ->with('chartData', json_encode(array_column($dataNOA2, 'norek'), JSON_NUMERIC_CHECK))
             ->with('OSData', json_encode(array_column($this->statistikos(), 'jumlahOS'), JSON_NUMERIC_CHECK))
@@ -44,6 +68,7 @@ class HomeController extends Controller
             ->with('statistikOSNPLLengkap', array_column($this->statistikOSNPLlengkap(), 'jumlah'))
             ->with('statistikOSNPL', array_column($this->statistikOSNPL(), 'jumlah'))
             ->with('statistikOSKOL', array_column($this->statistikOSKOL(), 'jumlah'), JSON_NUMERIC_CHECK)
+            ->with('statistikOSKOLNormatif', array_column($this->statistikOSKOLNormatif(), 'jumlah'))
             ->with('statistikOSNPLNominatif', array_column($this->statistikOSNPLNominatif(), 'jumlah'), JSON_NUMERIC_CHECK);
     }
     public function statistikos()
@@ -104,12 +129,26 @@ class HomeController extends Controller
     }
     public function statistikOSKOL()
     {
-        return DB::table('masters')
-            ->select('NamaUnit', DB::raw('sum(OS_Pokok) as jumlah'))
-            ->where(DB::raw('kolektibilitas="PK"'))
-            ->groupBy('NamaUnit')
-            ->orderBy('NamaUnit')
-            ->get()->toArray();
+        return DB::select("SELECT sum(OS_Pokok) as jumlah FROM 
+            `masters` WHERE (kolektibilitas='PK') and
+            TglRealisasi BETWEEN 
+            " . "'" . Carbon::now()->startofMonth()->toDateString() . "'" . " 
+            and " . "'" . Carbon::now()->startofMonth()->endOfMonth()->toDateString() . "'" . "    
+            GROUP by NamaUnit order by NamaUnit");
+    }
+    public function statistikOSKOLLengkap()
+    {
+        return DB::select("SELECT sum(OS_Pokok) as jumlah FROM 
+            `masters` WHERE (kolektibilitas='PK')    
+            GROUP by NamaUnit order by NamaUnit");
+    }
+    public function statistikOSKOLNormatif()
+    {
+        return DB::select("SELECT sum(OS_Pokok) as jumlah FROM `masters` WHERE (kolektibilitas='PK') and
+         TglRealisasi BETWEEN 
+            " . "'" . Carbon::now()->startofMonth()->subMonth()->toDateString() . "'" . " 
+            and " . "'" . Carbon::now()->startofMonth()->subMonth()->endOfMonth()->toDateString() . "'" . "
+        GROUP by NamaUnit order by NamaUnit");
     }
 
     public function masuk()
